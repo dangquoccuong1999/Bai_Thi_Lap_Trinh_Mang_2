@@ -1,11 +1,13 @@
 <?php
+
+
 include_once 'Model/DBConnect.php';
 include_once 'Model/ProductDB.php';
 include_once 'Model/Product.php';
 
 class ProductController
 {
-    private $productDb;
+    public $productDb;
 
     public function __construct()
     {
@@ -13,9 +15,13 @@ class ProductController
         $this->productDb = $productDb;
     }
 
+    public function index()
+    {
+        $this->getAllProducts();
+        include_once 'View/index.php';
+    }
     public function getAllProducts()
     {
         $product = $this->productDb->getAllProducts();
-        var_dump($product);
     }
 }

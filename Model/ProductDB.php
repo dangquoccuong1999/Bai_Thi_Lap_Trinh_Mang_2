@@ -21,7 +21,6 @@ class ProductDB
         $arr = [];
         foreach ($data as $value) {
             $product = new Product($value['id'], $value['name_product'], $value['name_producer'], $value['origin'], $value['description'], $value['img_product']);
-            $product->id = $value['id'];
             array_push($arr, $product);
         }
         return $arr;
