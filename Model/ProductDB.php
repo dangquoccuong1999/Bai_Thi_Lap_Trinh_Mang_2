@@ -1,6 +1,9 @@
 <?php
+
+
 include_once 'DBConnect.php';
 include_once 'Product.php';
+include_once 'ProductDetail.php';
 
 class ProductDB
 {
@@ -16,14 +19,23 @@ class ProductDB
     {
         $sql = "SELECT * FROM `products`";
         $stmt = $this->conn->query($sql);
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $dataProduct = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $sql = "SELECT * FROM `product_detail` WHERE capacity ='100ml'";
+        $stmt = $this->conn->query($sql);
+        $dataProductDetail = $stmt->fetchAll(PDO::FETCH_ASSOC);
+       
 
         $arr = [];
-        foreach ($data as $value) {
-            $product = new Product($value['id'], $value['name_product'], $value['name_producer'], $value['origin'], $value['description'], $value['img_product']);
+        $i = 0;
+        foreach ($dataProduct as $value) {
+
+            $productDetail = new ProductDetail($dataProductDetail[$i]['id'], $dataProductDetail[$i]['price'], $dataProductDetail[$i]['capacity'], $dataProductDetail[$i]['quantity_number'], $dataProductDetail[$i]['id_product']);
+            $i++;
+
+            $product = new Product($value['id'], $value['name_product'], $value['name_producer'], $value['origin'], $value['description'], $value['img_product'], $productDetail);
             array_push($arr, $product);
         }
         return $arr;
     }
-
 }

@@ -22,6 +22,7 @@ class ProductController
     }
     public function getAllProducts()
     {
-        $product = $this->productDb->getAllProducts();
+        $products = $this->productDb->getAllProducts();
+        include_once 'View/index.php';
     }
 }
