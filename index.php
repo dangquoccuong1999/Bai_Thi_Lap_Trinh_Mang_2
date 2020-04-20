@@ -4,7 +4,7 @@ include_once 'Model/ProductDB.php';
 include_once 'Model/Product.php';
 include_once 'Controller/ProductController.php';
 
-$controller = new ProductController();
+$productController = new ProductController();
 $page = isset($_REQUEST['page'])? $_REQUEST['page'] : NULL;
 
 switch ($page) {
@@ -20,6 +20,6 @@ switch ($page) {
     case 'seach':
         // $controller->seach();
     default:
-        $controller->index();
+        $productController->index();
         break;
 }

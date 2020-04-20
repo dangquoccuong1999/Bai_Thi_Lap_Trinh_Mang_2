@@ -21,7 +21,7 @@ class DBConnect
     public function connect()
     {
         try{
-            $conn = new PDO($this->link,$this->user,$this->pass);
+            $conn = new PDO($this->link,$this->user,$this->pass, $this->options);
 
         }catch (PDOException $e){
             return $e->getMessage();

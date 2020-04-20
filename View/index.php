@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-slider owl-carousel ftco-animate">
-                        <?php foreach ($products as $value) { ?>
+                        <?php foreach ($this->getAllProducts() as $value) { ?>
                             <div class="item">
                                 <div class="product">
                                     <a href="#" class="img-prod"><img class="img-fluid" src="View/<?php echo $value->getImg_product() ?>" alt="Colorlib Template">
@@ -281,7 +281,40 @@
         </div>
     </section>
 
-    
+    <section class="ftco-section testimony-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-3 pb-3">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <h1 class="big">Founder</h1>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8 ftco-animate">
+                    <div class="row ftco-animate">
+                        <div class="col-md-12">
+                            <div class="carousel-testimony owl-carousel ftco-owl">
+                                <?php foreach ($this->founderController->getAllFounders() as $founder) { ?>
+                                    <div class="item">
+                                        <div class="testimony-wrap py-4 pb-5">
+                                            <div class="user-img mb-4" style="background-image: url(<?php echo $founder->getImg() ?>)">
+                                                <span class="quote d-flex align-items-center justify-content-center">
+                                                    <i class="icon-quote-left"></i>
+                                                </span>
+                                            </div>
+                                            <div class="text text-center">
+                                                <p class="mb-4"><?php echo $founder->getDescription() ?></p>
+                                                <p class="name"><?php echo $founder->getName_founder() ?></p>
+                                                <span class="position"><?php echo $founder->getAge()?> Tuổi</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
 
 
     <section class="ftco-section">
