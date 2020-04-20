@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Modist - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Modist - Đặng Cường Trọng Tấn</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -271,7 +271,7 @@
         </div>
     </section>
 
-    <section class="ftco-section ftco-section-more img" style="background-image: url(images/bg_5.jpg);">
+    <section class="ftco-section ftco-section-more img" style="background-image: url(View/images/bg_5.jpg);">
         <div class="container">
             <div class="row justify-content-center mb-3 pb-3">
                 <div class="col-md-12 heading-section ftco-animate">
@@ -281,95 +281,7 @@
         </div>
     </section>
 
-    <section class="ftco-section testimony-section bg-light">
-        <div class="container">
-            <div class="row justify-content-center mb-3 pb-3">
-                <div class="col-md-12 heading-section text-center ftco-animate">
-                    <h1 class="big">Testimony</h1>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-8 ftco-animate">
-                    <div class="row ftco-animate">
-                        <div class="col-md-12">
-                            <div class="carousel-testimony owl-carousel ftco-owl">
-                                <div class="item">
-                                    <div class="testimony-wrap py-4 pb-5">
-                                        <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)">
-                                            <span class="quote d-flex align-items-center justify-content-center">
-                                                <i class="icon-quote-left"></i>
-                                            </span>
-                                        </div>
-                                        <div class="text text-center">
-                                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                                            <p class="name">Roger Scott</p>
-                                            <span class="position">Customer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="testimony-wrap py-4 pb-5">
-                                        <div class="user-img mb-4" style="background-image: url(images/person_2.jpg)">
-                                            <span class="quote d-flex align-items-center justify-content-center">
-                                                <i class="icon-quote-left"></i>
-                                            </span>
-                                        </div>
-                                        <div class="text text-center">
-                                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                                            <p class="name">Roger Scott</p>
-                                            <span class="position">Customer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="testimony-wrap py-4 pb-5">
-                                        <div class="user-img mb-4" style="background-image: url(images/person_3.jpg)">
-                                            <span class="quote d-flex align-items-center justify-content-center">
-                                                <i class="icon-quote-left"></i>
-                                            </span>
-                                        </div>
-                                        <div class="text text-center">
-                                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                                            <p class="name">Roger Scott</p>
-                                            <span class="position">Customer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="testimony-wrap py-4 pb-5">
-                                        <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)">
-                                            <span class="quote d-flex align-items-center justify-content-center">
-                                                <i class="icon-quote-left"></i>
-                                            </span>
-                                        </div>
-                                        <div class="text text-center">
-                                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                                            <p class="name">Roger Scott</p>
-                                            <span class="position">Customer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="testimony-wrap py-4 pb-5">
-                                        <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)">
-                                            <span class="quote d-flex align-items-center justify-content-center">
-                                                <i class="icon-quote-left"></i>
-                                            </span>
-                                        </div>
-                                        <div class="text text-center">
-                                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                                            <p class="name">Roger Scott</p>
-                                            <span class="position">Customer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
 
     <section class="ftco-section">
@@ -383,7 +295,7 @@
             <div class="row d-flex">
                 <div class="col-md-4 d-flex ftco-animate">
                     <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
+                        <a href="blog-single.html" class="block-20" style="background-image: url('View/images/image_1.jpg');">
                         </a>
                         <div class="text mt-3 d-block">
                             <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
@@ -397,7 +309,7 @@
                 </div>
                 <div class="col-md-4 d-flex ftco-animate">
                     <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
+                        <a href="blog-single.html" class="block-20" style="background-image: url('View/images/image_2.jpg');">
                         </a>
                         <div class="text mt-3">
                             <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
@@ -411,7 +323,7 @@
                 </div>
                 <div class="col-md-4 d-flex ftco-animate">
                     <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
+                        <a href="blog-single.html" class="block-20" style="background-image: url('View/images/image_3.jpg');">
                         </a>
                         <div class="text mt-3">
                             <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
@@ -427,7 +339,7 @@
         </div>
     </section>
 
-    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_4.jpg);">
+    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(View/images/bg_4.jpg);">
         <div class="container">
             <div class="row justify-content-center py-5">
                 <div class="col-md-10">
