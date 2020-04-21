@@ -9,7 +9,7 @@ class Product
     private $origin;
     private $description;
     private $img_product;
-    public $productDetail;
+    private $productDetail;
     
     public function __construct($id, $name_product, $name_producer, $origin, $description, $img_product,$productDetail)
     {

@@ -86,8 +86,8 @@
         <div class="container">
             <div class="row justify-content-center mb-3 pb-3">
                 <div class="col-md-12 heading-section text-center ftco-animate">
-                    <h1 class="big">Trending</h1>
-                    <h2 class="mb-4">Trending</h2>
+                    <h1 class="big">Products</h1>
+                    <h2 class="mb-4">Our Products</h2>
                 </div>
             </div>
             <div class="row">
@@ -152,120 +152,48 @@
         <div class="container">
             <div class="row justify-content-center mb-3 pb-3">
                 <div class="col-md-12 heading-section text-center ftco-animate">
-                    <h1 class="big">Products</h1>
-                    <h2 class="mb-4">Our Products</h2>
+                    <h1 class="big">Trending</h1>
+                    <h2 class="mb-4">Trending</h2>
                 </div>
             </div>
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm col-md-6 col-lg ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-1.jpg" alt="Colorlib Template"></a>
-                        <div class="text py-3 px-3">
-                            <h3><a href="#">Young Woman Wearing Dress</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span>$120.00</span></p>
+                <?php
+                foreach ($productPagination as $product) {
+                ?>
+                    <div class="col-sm col-md-6 col-lg ftco-animate">
+                        <div class="product">
+                            <a href="#" class="img-prod"><img class="img-fluid" src="View/<?php echo $product->getImg_product() ?>" alt="Colorlib Template"></a>
+                            <div class="text py-3 px-3">
+                                <h3><a href="#"><?php echo $product->getName_product() ?></a></h3>
+                                <div class="d-flex">
+                                    <div class="pricing">
+                                        <p class="price"><span class="mr-2 "><?php echo $product->getProductDetail()->getCapacity() ?></span><span class="price-sale"><?php echo number_format($product->getProductDetail()->getPrice()) ?> VND</span></p>
+                                    </div>
+                                    <div class="rating">
+                                        <p class="text-right">
+                                            <span class="ion-ios-star-outline"></span>
+                                            <span class="ion-ios-star-outline"></span>
+                                            <span class="ion-ios-star-outline"></span>
+                                            <span class="ion-ios-star-outline"></span>
+                                            <span class="ion-ios-star-outline"></span>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="rating">
-                                    <p class="text-right">
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                    </p>
-                                </div>
+                                <hr>
+                                <p class="bottom-area d-flex">
+                                    <a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+                                    <a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+                                </p>
                             </div>
-                            <hr>
-                            <p class="bottom-area d-flex">
-                                <a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-                                <a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
-                            </p>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm col-md-6 col-lg ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-2.jpg" alt="Colorlib Template"></a>
-                        <div class="text py-3 px-3">
-                            <h3><a href="#">Young Woman Wearing Dress</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span>$120.00</span></p>
-                                </div>
-                                <div class="rating">
-                                    <p class="text-right">
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <hr>
-                            <p class="bottom-area d-flex">
-                                <a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-                                <a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm col-md-6 col-lg ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-3.jpg" alt="Colorlib Template"></a>
-                        <div class="text py-3 px-3">
-                            <h3><a href="#">Young Woman Wearing Dress</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span>$120.00</span></p>
-                                </div>
-                                <div class="rating">
-                                    <p class="text-right">
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <hr>
-                            <p class="bottom-area d-flex">
-                                <a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-                                <a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm col-md-6 col-lg ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-4.jpg" alt="Colorlib Template"></a>
-                        <div class="text py-3 px-3">
-                            <h3><a href="#">Young Woman Wearing Dress</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span>$120.00</span></p>
-                                </div>
-                                <div class="rating">
-                                    <p class="text-right">
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                        <span class="ion-ios-star-outline"></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <hr>
-                            <p class="bottom-area d-flex">
-                                <a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-                                <a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
-                            </p>
-                        </div>
-                    </div>
+
+                <?php
+                }
+                ?>
+            </div>
                 </div>
             </div>
         </div>
@@ -304,7 +232,7 @@
                                             <div class="text text-center">
                                                 <p class="mb-4"><?php echo $founder->getDescription() ?></p>
                                                 <p class="name"><?php echo $founder->getName_founder() ?></p>
-                                                <span class="position"><?php echo $founder->getAge()?> Tuổi</span>
+                                                <span class="position"><?php echo $founder->getAge() ?> Tuổi</span>
                                             </div>
                                         </div>
                                     </div>
