@@ -8,16 +8,18 @@ class Product
     private $name_producer;
     private $origin;
     private $description;
+    private $category;
     private $img_product;
     private $productDetail;
     
-    public function __construct($id, $name_product, $name_producer, $origin, $description, $img_product,$productDetail)
+    public function __construct($id, $name_product, $name_producer, $origin, $description,$category, $img_product,$productDetail)
     {
         $this->id = $id;
         $this->name_product = $name_product;
         $this->name_producer = $name_producer;
         $this->origin = $origin;
         $this->description = $description;
+        $this->category = $category;
         $this->img_product = $img_product;
         $this->productDetail = $productDetail;
     }
@@ -78,4 +80,13 @@ class Product
     {
         return $this->productDetail;
     }
+
+    /**
+     * Get the value of category
+     */ 
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
 }

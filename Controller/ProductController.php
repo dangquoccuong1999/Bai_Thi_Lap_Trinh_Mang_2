@@ -55,6 +55,7 @@ class ProductController
         }
         
         $productPagination = $this->productDb->pagination($current_page, $limit);
+        
         include_once 'View/index.php';
     }
 }

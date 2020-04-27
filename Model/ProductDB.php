@@ -34,7 +34,7 @@ class ProductDB
             $productDetail = new ProductDetail($dataProductDetail[$i]['id'], $dataProductDetail[$i]['price'], $dataProductDetail[$i]['capacity'], $dataProductDetail[$i]['quantity_number'], $dataProductDetail[$i]['id_product']);
             $i++;
 
-            $product = new Product($value['id'], $value['name_product'], $value['name_producer'], $value['origin'], $value['description'], $value['img_product'], $productDetail);
+            $product = new Product($value['id'], $value['name_product'], $value['name_producer'], $value['origin'], $value['description'],$value['category'], $value['img_product'], $productDetail);
             array_push($arr, $product);
         }
         return $arr;
@@ -43,7 +43,7 @@ class ProductDB
     //phân trang
     public function getTotalRecords()
     {
-        //TÌM TỔNG SỐ RECORDS
+        //TÌM TỔNG SỐ RECORDS 
         $sql = "select count(id) as total from products";
         $stmt = $this->conn->query($sql);
         $total_records = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -71,7 +71,7 @@ class ProductDB
 
             $productDetail = new ProductDetail($dataProductDetail['id'], $dataProductDetail['price'], $dataProductDetail['capacity'], $dataProductDetail['quantity_number'], $dataProductDetail['id_product']);
 
-            $product = new Product($value['id'], $value['name_product'], $value['name_producer'], $value['origin'], $value['description'], $value['img_product'], $productDetail);
+            $product = new Product($value['id'], $value['name_product'], $value['name_producer'], $value['origin'], $value['description'],$value['category'], $value['img_product'], $productDetail);
             array_push($arr, $product);
         }
         return $arr;
