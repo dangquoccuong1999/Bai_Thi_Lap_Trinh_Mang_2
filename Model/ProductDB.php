@@ -2,8 +2,7 @@
 
 
 include_once 'DBConnect.php';
-include_once 'Product.php';
-include_once 'ProductDetail.php';
+
 
 class ProductDB
 {
@@ -18,26 +17,34 @@ class ProductDB
     // Lấy tất cả sản phẩm và chi tiết của sản phẩm
     public function getAllProducts()
     {
-        $sql = "SELECT * FROM `products`";
+        $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '100ml' AND products.id = product_detail.id_product";
         $stmt = $this->conn->query($sql);
-        $dataProduct = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $products;
+    }
 
-        $sql = "SELECT * FROM `product_detail` WHERE capacity ='100ml'";
+    public function trending()
+    {
+        // lấy ra 4 sản phẩm có số lượng bán nhiều nhất
+        $sql = "SELECT id_product,SUM(quantity_number) AS SL FROM bill_details GROUP BY id_product ORDER BY SL DESC LIMIT 4";
         $stmt = $this->conn->query($sql);
-        $dataProductDetail = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $arr = [];
-        $i = 0;
-        foreach ($dataProduct as $value) {
+    
+        // hiển thị ra các sản phẩm trên và push vào mảng
+        foreach ($products as $product) {
+            $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '100ml' AND products.id = product_detail.id_product AND products.id = ". $product['id_product'];
+            $stmt = $this->conn->query($sql);
+            $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $productDetail = new ProductDetail($dataProductDetail[$i]['id'], $dataProductDetail[$i]['price'], $dataProductDetail[$i]['capacity'], $dataProductDetail[$i]['quantity_number'], $dataProductDetail[$i]['id_product']);
-            $i++;
-
-            $product = new Product($value['id'], $value['name_product'], $value['name_producer'], $value['origin'], $value['description'],$value['category'], $value['img_product'], $productDetail);
             array_push($arr, $product);
         }
         return $arr;
+    }
+    //single product
+
+    public function singleProduct($id)
+    {
     }
 
     //phân trang
@@ -55,25 +62,9 @@ class ProductDB
         // Tìm Start
         $start = ($current_page - 1) * $limit;
         //TRUY VẤN LẤY DANH SÁCH TIN TỨC
-        $sql = "SELECT * FROM products LIMIT $start, $limit";
+        $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '100ml' AND products.id = product_detail.id_product LIMIT $start, $limit";
         $stmt = $this->conn->query($sql);
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-        //tạo product trong product có productdetail
-        $arr = [];
-        foreach ($products as $value) {
-            $capacity = '100ml';
-            $id = $value['id'];
-            $sql = "SELECT * FROM product_detail WHERE capacity = '$capacity' AND id_product = $id";
-            $stmt = $this->conn->query($sql);
-            $dataProductDetail = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            $productDetail = new ProductDetail($dataProductDetail['id'], $dataProductDetail['price'], $dataProductDetail['capacity'], $dataProductDetail['quantity_number'], $dataProductDetail['id_product']);
-
-            $product = new Product($value['id'], $value['name_product'], $value['name_producer'], $value['origin'], $value['description'],$value['category'], $value['img_product'], $productDetail);
-            array_push($arr, $product);
-        }
-        return $arr;
+        return $products;
     }
 }

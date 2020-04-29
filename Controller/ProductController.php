@@ -3,7 +3,6 @@
 
 include_once 'Model/DBConnect.php';
 include_once 'Model/ProductDB.php';
-include_once 'Model/Product.php';
 include_once 'Controller/FounderController.php';
 
 class ProductController
@@ -23,14 +22,19 @@ class ProductController
     public function index()
     {
         $this->getAllProducts();
+        $this->trending();
         $this->founderController->getAllFounders();
-        $this->pagination();
 
         include_once 'View/index.php';
     }
     public function getAllProducts()
     {
         return $this->productDb->getAllProducts();
+    }
+
+    public function trending()
+    {
+        return $this->productDb->trending();
     }
 
     // phân chia trang
@@ -53,9 +57,7 @@ class ProductController
         } else if ($current_page < 1) {
             $current_page = 1;
         }
-        
+
         $productPagination = $this->productDb->pagination($current_page, $limit);
-        
-        include_once 'View/index.php';
     }
 }

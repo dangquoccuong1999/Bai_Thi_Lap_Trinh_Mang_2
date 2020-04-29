@@ -93,17 +93,17 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-slider owl-carousel ftco-animate">
-                        <?php foreach ($this->getAllProducts() as $value) { ?>
+                        <?php foreach ($this->getAllProducts() as $product) { ?>
                             <div class="item">
                                 <div class="product">
-                                    <a href="#" class="img-prod"><img class="img-fluid" src="View/<?php echo $value->getImg_product() ?>" alt="Colorlib Template">
+                                    <a href="#" class="img-prod"><img class="img-fluid" src="View/<?php echo $product['img_product'] ?>" alt="Colorlib Template">
                                         <!-- <span class="status">30%</span> -->
                                     </a>
                                     <div class="text pt-3 px-3">
-                                        <h3 style="text-align: center;"><a href="#"><?php echo $value->getName_product() ?></a></h3>
+                                        <h3 style="text-align: center;"><a href="#"><?php echo $product['name_product'] ?></a></h3>
                                         <div class="d-flex">
                                             <div class="pricing">
-                                                <p class="price"><span class="mr-2 "><?php echo $value->getProductDetail()->getCapacity() ?></span><span class="price-sale"><?php echo number_format($value->getProductDetail()->getPrice()) ?> VND</span></p>
+                                                <p class="price"><span class="mr-2 "><?php echo $product['capacity'] ?></span><span class="price-sale"><?php echo number_format($product['price']) ?> VND</span></p>
                                             </div>
                                             <div class="rating">
                                                 <p class="text-right">
@@ -160,16 +160,16 @@
         <div class="container-fluid">
             <div class="row">
                 <?php
-                foreach ($productPagination as $product) {
+                foreach ($this->trending() as $product) {
                 ?>
                     <div class="col-sm col-md-6 col-lg ftco-animate">
                         <div class="product">
-                            <a href="#" class="img-prod"><img class="img-fluid" src="View/<?php echo $product->getImg_product() ?>" alt="Colorlib Template"></a>
+                            <a href="#" class="img-prod"><img class="img-fluid" src="View/<?php echo $product['img_product']  ?>" alt="Colorlib Template"></a>
                             <div class="text py-3 px-3">
-                                <h3><a href="#"><?php echo $product->getName_product() ?></a></h3>
+                                <h3><a href="#"><?php  ?></a></h3>
                                 <div class="d-flex">
                                     <div class="pricing">
-                                        <p class="price"><span class="mr-2 "><?php echo $product->getProductDetail()->getCapacity() ?></span><span class="price-sale"><?php echo number_format($product->getProductDetail()->getPrice()) ?> VND</span></p>
+                                        <p class="price"><span class="mr-2 "><?php echo $product['capacity']  ?></span><span class="price-sale"><?php echo number_format($product['price']) ?> VND</span></p>
                                     </div>
                                     <div class="rating">
                                         <p class="text-right">
@@ -194,8 +194,8 @@
                 }
                 ?>
             </div>
-                </div>
-            </div>
+        </div>
+        </div>
         </div>
     </section>
 
