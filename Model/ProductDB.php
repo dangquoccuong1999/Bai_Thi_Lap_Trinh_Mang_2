@@ -30,10 +30,10 @@ class ProductDB
         $stmt = $this->conn->query($sql);
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $arr = [];
-    
+
         // hiển thị ra các sản phẩm trên và push vào mảng
         foreach ($products as $product) {
-            $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '100ml' AND products.id = product_detail.id_product AND products.id = ". $product['id_product'];
+            $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '100ml' AND products.id = product_detail.id_product AND products.id = " . $product['id_product'];
             $stmt = $this->conn->query($sql);
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -43,8 +43,18 @@ class ProductDB
     }
     //single product
 
-    public function singleProduct($id)
+    public function getSingleProduct($id,$capacity)
     {
+        $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '$capacity' AND products.id = product_detail.id_product AND products.id = " . $id;
+        $stmt = $this->conn->query($sql);
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $sql = "SELECT id,capacity FROM product_detail WHERE id_product = $id order by id desc";
+        $stmt = $this->conn->query($sql);
+        $capacity = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $arr = [$product,$capacity];
+        return $arr;
     }
 
     //phân trang

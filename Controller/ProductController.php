@@ -21,10 +21,6 @@ class ProductController
 
     public function index()
     {
-        $this->getAllProducts();
-        $this->trending();
-        $this->founderController->getAllFounders();
-
         include_once 'View/index.php';
     }
     public function getAllProducts()
@@ -37,6 +33,25 @@ class ProductController
         return $this->productDb->trending();
     }
 
+    //single product
+    public function singleProduct()
+    {
+        include_once 'View/singleProduct.php';
+    }
+
+    public function getSingleProduct()
+    {
+        $id = $_GET['id'];
+
+        if (isset($_GET['capacity'])) {
+            $capacity = $_GET['capacity'];
+
+            return $this->productDb->getSingleProduct($id, $capacity);
+        } else {
+            $capacity = '100ml';
+            return $this->productDb->getSingleProduct($id, $capacity);
+        }
+    }
     // phân chia trang
     public function pagination()
     {

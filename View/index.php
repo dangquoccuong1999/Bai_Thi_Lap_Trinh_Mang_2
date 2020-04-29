@@ -33,14 +33,14 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Modist</a>
+            <a class="navbar-brand" href="">Modist</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="" class="nav-link">Home</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -96,11 +96,11 @@
                         <?php foreach ($this->getAllProducts() as $product) { ?>
                             <div class="item">
                                 <div class="product">
-                                    <a href="#" class="img-prod"><img class="img-fluid" src="View/<?php echo $product['img_product'] ?>" alt="Colorlib Template">
+                                    <a href="?page=single_product&id=<?php echo $product['id'] ?>" class="img-prod"><img class="img-fluid" src="View/<?php echo $product['img_product'] ?>" alt="Colorlib Template">
                                         <!-- <span class="status">30%</span> -->
                                     </a>
                                     <div class="text pt-3 px-3">
-                                        <h3 style="text-align: center;"><a href="#"><?php echo $product['name_product'] ?></a></h3>
+                                        <h3 style="text-align: center;"><a href="?page=single_product&id=<?php echo $product['id'] ?>"><?php echo $product['name_product'] ?></a></h3>
                                         <div class="d-flex">
                                             <div class="pricing">
                                                 <p class="price"><span class="mr-2 "><?php echo $product['capacity'] ?></span><span class="price-sale"><?php echo number_format($product['price']) ?> VND</span></p>
@@ -164,9 +164,9 @@
                 ?>
                     <div class="col-sm col-md-6 col-lg ftco-animate">
                         <div class="product">
-                            <a href="#" class="img-prod"><img class="img-fluid" src="View/<?php echo $product['img_product']  ?>" alt="Colorlib Template"></a>
+                            <a href="?page=single_product&id=<?php echo $product['id'] ?>" class="img-prod"><img class="img-fluid" src="View/<?php echo $product['img_product']  ?>" alt="Colorlib Template"></a>
                             <div class="text py-3 px-3">
-                                <h3><a href="#"><?php  ?></a></h3>
+                                <h3><a href="?page=single_product&id=<?php echo $product['id'] ?>"><?php echo $product['name_product']  ?></a></h3>
                                 <div class="d-flex">
                                     <div class="pricing">
                                         <p class="price"><span class="mr-2 "><?php echo $product['capacity']  ?></span><span class="price-sale"><?php echo number_format($product['price']) ?> VND</span></p>
