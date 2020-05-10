@@ -43,7 +43,7 @@ class ProductDB
     }
     //single product
 
-    public function getSingleProduct($id,$capacity)
+    public function getSingleProduct($id, $capacity)
     {
         $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '$capacity' AND products.id = product_detail.id_product AND products.id = " . $id;
         $stmt = $this->conn->query($sql);
@@ -53,8 +53,29 @@ class ProductDB
         $stmt = $this->conn->query($sql);
         $capacity = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $arr = [$product,$capacity];
+        $arr = [$product, $capacity];
         return $arr;
+    }
+
+    //car
+    public function cart()
+    {
+        $products = [];
+        foreach ($_SESSION['cart'] as $product) {
+            $id = $product['id'];
+            $capacity = $product['capacity'];
+
+            $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '$capacity' AND products.id = product_detail.id_product AND products.id = " . $id;
+            $stmt = $this->conn->query($sql);
+            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+            array_push($products, $product);
+        }
+        // var_dump($products);
+        // lấy thời gian hiện tại của hệ thống
+        // $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
+        // echo $date->format('d-m-Y H:i:s');
+        //  var_dump($products);
+        return $products;
     }
 
     //phân trang

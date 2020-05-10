@@ -3,6 +3,7 @@ include_once 'Model/DBConnect.php';
 include_once 'Model/ProductDB.php';
 
 include_once 'Controller/ProductController.php';
+session_start();
 
 $productController = new ProductController();
 $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : NULL;
@@ -22,9 +23,11 @@ switch ($page) {
     case 'single_product':
         $productController->singleProduct();
         break;
-    case 'ok':
-        echo 'ok';
-        $productController->singleProduct();
+    case 'cart':
+        $productController->cart();
+        break;
+    case 'addCart':
+        $productController->addCart();
         break;
     default:
         $productController->index();

@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="View/css/style.css">
 </head>
 
+
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light ftco-navbar-light-2" id="ftco-navbar">
@@ -53,7 +54,7 @@
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                     <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+                    <li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['countCart'])) echo $_SESSION['countCart'] ?>]</a></li>
 
                 </ul>
             </div>
@@ -88,9 +89,16 @@
                             <div class="form-group d-flex">
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                    <form method="POST" action="">
-                                        <select name="" id="" class="form-control" onchange="location= this.value">
-                                            <option value="">Chọn</option>
+                                    <form method="get" action="">
+                                        <select name="capacity" id="" class="form-control" onchange="location= this.value">
+                                            <option value="">
+                                                <?php if (isset($_GET['capacity'])) {
+                                                    echo $_GET['capacity'];
+                                                } else {
+                                                    echo 'Chọn';
+                                                }
+                                                ?>
+                                            </option>
                                             <?php foreach ($this->getSingleProduct()[1] as $capacity) { ?>
                                                 <option value="?page=single_product&id=<?php echo $this->getSingleProduct()[0]['id'] ?>&capacity=<?php echo $capacity['capacity'] ?>"><?php echo $capacity['capacity'] ?></option>
                                             <?php } ?>
@@ -114,12 +122,135 @@
                             </span>
                         </div>
                     </div>
-                    <p><a href="cart.html" class="btn btn-primary py-3 px-5">Add to Cart</a></p>
+                    <p><a href="?page=addCart&id=<?php echo $_GET['id'] ?>&capacity=<?php echo $_GET['capacity'] ?>&quantity= " class="btn btn-primary py-3 px-5 addProduct">Add to Cart</a></p>
                 </div>
             </div>
         </div>
     </section>
 
+    <section class="ftco-section bg-light">
+		<div class="container">
+			<div class="row justify-content-center mb-3 pb-3">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+					<h1 class="big">Products</h1>
+					<h2 class="mb-4">Related Products</h2>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm col-md-6 col-lg ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-1.jpg" alt="Colorlib Template"></a>
+						<div class="text py-3 px-3">
+							<h3><a href="#">Young Woman Wearing Dress</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$120.00</span></p>
+								</div>
+								<div class="rating">
+									<p class="text-right">
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+									</p>
+								</div>
+							</div>
+							<hr>
+							<p class="bottom-area d-flex">
+								<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+								<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm col-md-6 col-lg ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-2.jpg" alt="Colorlib Template"></a>
+						<div class="text py-3 px-3">
+							<h3><a href="#">Young Woman Wearing Dress</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$120.00</span></p>
+								</div>
+								<div class="rating">
+									<p class="text-right">
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+									</p>
+								</div>
+							</div>
+							<hr>
+							<p class="bottom-area d-flex">
+								<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+								<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm col-md-6 col-lg ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-3.jpg" alt="Colorlib Template"></a>
+						<div class="text py-3 px-3">
+							<h3><a href="#">Young Woman Wearing Dress</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$120.00</span></p>
+								</div>
+								<div class="rating">
+									<p class="text-right">
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+									</p>
+								</div>
+							</div>
+							<hr>
+							<p class="bottom-area d-flex">
+								<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+								<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm col-md-6 col-lg ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-4.jpg" alt="Colorlib Template"></a>
+						<div class="text py-3 px-3">
+							<h3><a href="#">Young Woman Wearing Dress</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$120.00</span></p>
+								</div>
+								<div class="rating">
+									<p class="text-right">
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+										<span class="ion-ios-star-outline"></span>
+									</p>
+								</div>
+							</div>
+							<hr>
+							<p class="bottom-area d-flex">
+								<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+								<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </section>
+    
     <section class="ftco-section-parallax">
         <div class="parallax-img d-flex align-items-center">
             <div class="container">
@@ -270,6 +401,7 @@
                     $('#quantity').val(quantity - 1);
                 }
             });
+
 
         });
     </script>
