@@ -141,6 +141,90 @@ class ProductController
         return $this->productDb->recommended_products();
     }
 
-    // phân chia trang
+    // đăng nhập
+    public function login()
+    {
+        if (isset($_REQUEST['submit'])) {
+            $user = $_POST['user'];
+            $pass = $_POST['pass'];
 
+            if ($user != '' && $pass != '') {
+                $data = $this->productDb->login($user, $pass);
+                if (!empty($data)) {
+                    $_SESSION['user'] =  $data;
+                    header('Location: index.php');
+                } else {
+                    if (!empty($this->productDb->checkUser($user))) {
+                        $_SESSION['error'] = 'Đăng nhập sai';
+                        include 'View/login.php';
+                    } else {
+                        $_SESSION['error'] = 'User không tồn tại';
+                        include 'View/login.php';
+                    }
+                }
+            } else {
+                $_SESSION['error'] = 'Tài khoản mật khẩu không được để trống';
+                include 'View/login.php';
+            }
+        } else {
+            include 'View/login.php';
+        }
+    }
+
+    public function userProfile()
+    {
+
+        include 'View/userProfile.php';
+    }
+
+    public function updateUser()
+    {
+        if (isset($_POST['name'])) {
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $sex = $_POST['sex'];
+            $pass1 = $_POST['password'];
+            $pass2 = $_POST['password2'];
+            $phone = $_POST['phone'];
+            $address = $_POST['address'];
+            $dateOfBirth = $_POST['day'];
+            if ($name == "") {
+                $thongBao = "Tên không được để trống !";
+            } else {
+                if ($email == "") {
+                    $thongBao = "Email không được để trống !";
+                } else {
+                    if ($sex == "") {
+                        $thongBao = "Giới tính không được để trống !";
+                    } else {
+                        if ($phone == "") {
+                            $thongBao = "Số điện thoại không được để trống !";
+                        } else {
+                            if ($address == "") {
+                                $thongBao = "Địa chỉ không được để trống !";
+                            } else {
+                                if ($dateOfBirth == "") {
+                                    $thongBao = "Ngày sinh không được để trống !";
+                                } else {
+                                    if ($pass1 == "" || $pass2 == "") {
+                                        $thongBao = "Mật khẩu không được để trống !";
+                                    } else {
+                                        if ($pass1 == $pass2) {
+                                            $this->productDb->updateUser($name, $phone, $email, $address, $pass1, $sex, $dateOfBirth);
+                                            $data = $this->productDb->login($_SESSION['user']['user'], $pass1);
+                                            $_SESSION['user'] = $data;
+                                            $thongBao = "Đã cập nhật thành công !";
+                                        } else {
+                                            $thongBao = "Mật khẩu phải trùng nhau !";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            include 'View/userProfile.php';
+        }
+    }
 }

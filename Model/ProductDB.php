@@ -139,4 +139,36 @@ class ProductDB
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $products;
     }
+
+    //đăng nhập
+    public function login($userName, $password)
+    {
+        $user = $userName;
+        $pass = $password;
+
+        $sql = "SELECT users.id,users.user,users.email, customer.name, customer.date_of_birth,customer.number_phone,customer.sex,customer.address FROM `users`, customer Where user ='$user' AND password = '$pass' AND users.id = customer.id_user";
+        $stmt = $this->conn->query($sql);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    public function checkUser($userName)
+    {
+        $user = $userName;
+
+        $sql = "SELECT * FROM `users` Where user  ='$user'";
+        $stmt = $this->conn->query($sql);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    public function updateUser($name, $phone, $email, $address, $password,$sex,$dateOfBirth)
+    {
+        $id = $_SESSION['user']['id'];
+        $sql = "UPDATE customer SET name = '$name', number_phone ='$phone', address ='$address', date_of_birth ='$dateOfBirth', sex ='$sex' WHERE id_user = '$id'";
+        $stmt = $this->conn->query($sql);
+
+        $sql = "UPDATE users SET email='$email',password='$password' WHERE id= '$id'";
+        $stmt = $this->conn->query($sql);
+    }
 }

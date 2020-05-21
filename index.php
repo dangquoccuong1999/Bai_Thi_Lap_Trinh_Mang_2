@@ -9,14 +9,14 @@ $productController = new ProductController();
 $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : NULL;
 
 switch ($page) {
-    case 'add':
-        // $controller->add();
-        // break;
-    case 'delete':
-        // $controller->delete();
+    case 'updateUser':
+        $productController->updateUser();
         break;
-    case 'update':
-        // $controller->update();
+    case 'userProfile':
+        $productController->userProfile();
+        break;
+    case 'login':
+        $productController->login();
         break;
     case 'shop':
         $productController->shop();

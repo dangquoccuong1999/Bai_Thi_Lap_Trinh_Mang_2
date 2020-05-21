@@ -48,9 +48,18 @@
                             <a class="dropdown-item" href="?page=cart">Cart</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a href="" class="nav-link">User</a></li>
-					<li class="nav-item"><a href="" class="nav-link">Đăng Nhập</a></li>
-					<li class="nav-item"><a href="" class="nav-link">Đăng Xuất</a></li>
+                    <?php if (isset($_SESSION['user'])) { ?>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php if (isset($_SESSION['user'])) echo  $_SESSION['user']['user'] ?></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" href="?page=userProfile">Tài khoản của tôi</a>
+                                <a class="dropdown-item" href="">Đăng xuất</a>
+                            </div>
+                        </li>
+                    <?php } else {
+                        echo "<li class='nav-item'><a href='?page=login' class='nav-link'>Đăng Kí</a></li>";
+                    } ?>
+                    <li class="nav-item"><a href="?page=login" class="nav-link">Đăng Nhập</a></li>
                     <li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['total'])) echo $_SESSION['total'] ?>]</a></li>
 
                 </ul>
@@ -505,5 +514,4 @@
     <script src="View/js/main.js"></script>
 
 </body>
-
 </html>
