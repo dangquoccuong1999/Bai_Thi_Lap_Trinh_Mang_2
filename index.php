@@ -29,6 +29,9 @@ switch ($page) {
     case 'addCartToShop':
         $productController->addCartToShop();
         break;
+    case 'logout':
+        $productController->logout();
+        break;
     default:
         $productController->index();
         break;

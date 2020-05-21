@@ -177,6 +177,7 @@ class ProductController
         include 'View/userProfile.php';
     }
 
+    //khách hàng cập nhật thông tin cá nhân
     public function updateUser()
     {
         if (isset($_POST['name'])) {
@@ -227,4 +228,12 @@ class ProductController
             include 'View/userProfile.php';
         }
     }
+
+    public function logout(){
+        unset($_SESSION['user']);
+        unset($_SESSION['cart']);
+        unset($_SESSION['total']);
+        header('Location: index.php');
+    }
+
 }
