@@ -18,16 +18,16 @@ switch ($page) {
     case 'update':
         // $controller->update();
         break;
-    case 'seach':
-        // $controller->seach();
+    case 'shop':
+        $productController->shop();
     case 'single_product':
         $productController->singleProduct();
         break;
     case 'cart':
         $productController->cart();
         break;
-    case 'addCart':
-        $productController->addCart();
+    case 'addCartToShop':
+        $productController->addCartToShop();
         break;
     default:
         $productController->index();

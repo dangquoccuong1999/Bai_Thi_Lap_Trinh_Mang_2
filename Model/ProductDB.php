@@ -51,33 +51,74 @@ class ProductDB
 
         $sql = "SELECT id,capacity FROM product_detail WHERE id_product = $id order by id desc";
         $stmt = $this->conn->query($sql);
-        $capacity = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $capacity = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $arr = [$product, $capacity];
         return $arr;
     }
 
     //car
-    public function cart()
+    public function checkOut()
     {
-        $products = [];
-        foreach ($_SESSION['cart'] as $product) {
-            $id = $product['id'];
-            $capacity = $product['capacity'];
+        $sql = "";
+        $stmt = $this->conn->query($sql);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '$capacity' AND products.id = product_detail.id_product AND products.id = " . $id;
-            $stmt = $this->conn->query($sql);
-            $product = $stmt->fetch(PDO::FETCH_ASSOC);
-            array_push($products, $product);
-        }
         // var_dump($products);
         // lấy thời gian hiện tại của hệ thống
         // $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
         // echo $date->format('d-m-Y H:i:s');
         //  var_dump($products);
-        return $products;
+        // return $products;
     }
 
+    // gợi ý sản phẩm 
+    public function recommended_products()
+    {
+        // lấy ra các dữ liệu sản phẩm khác 
+        $id = $_GET['id'];
+        $sql = "SELECT * FROM `recommend_products` WHERE id != $id";
+        $stmt = $this->conn->query($sql);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // lấy ra các dữ liệu sản phẩm hiện tại
+        $sql = "SELECT * FROM `recommend_products` WHERE id = $id";
+        $stmt = $this->conn->query($sql);
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $arrTuSo = [];
+        $arrMauSo = [];
+        $arrKetQua = [];
+        // tính tử số
+        foreach ($result as $value) {
+            $tuSo = ($product['JIMMY CHOO'] * $value['JIMMY CHOO']) + ($product['Dolce & Gabbana'] * $value['Dolce & Gabbana']) + ($product['Yves Saint Laurent'] * $value['Yves Saint Laurent']) + ($product['Dior'] * $value['Dior']) + ($product['Versace'] * $value['Versace']) + ($product['Giorgio'] * $value['Giorgio']) + ($product['Montblanc'] * $value['Montblanc']) + ($product['Valentino'] * $value['Valentino']) + ($product['Jo Malone'] * $value['Jo Malone']) + ($product['CHANEL'] * $value['CHANEL']) + ($product['origin_My'] * $value['origin_My']) + ($product['origin_Y'] * $value['origin_Y']) + ($product['origin_Phap'] * $value['origin_Phap']) + ($product['origin_Anh'] * $value['origin_Anh']) + ($product['category_man'] * $value['category_man']) + ($product['category_women'] * $value['category_women']) + ($product['rating'] * (1 / 10) * $value['rating'] * (1 / 10));
+            array_push($arrTuSo, [$tuSo, $value['id']]);
+        }
+        // tính mẫu số
+        foreach ($result as $value) {
+            $mauSo = sqrt(($value['JIMMY CHOO'] + $value['Dolce & Gabbana'] + $value['Yves Saint Laurent'] + $value['Dior'] + $value['Versace'] + $value['Giorgio'] + $value['Montblanc'] + $value['Valentino'] + $value['Jo Malone'] + $value['CHANEL'] +  $value['origin_My'] + $value['origin_Y'] + $value['origin_Phap'] + $value['origin_Anh'] + $value['category_man'] + $value['category_women'] + pow($value['rating'] * 1 / 10, 2))) * sqrt(($product['JIMMY CHOO'] + $product['Dolce & Gabbana'] + $product['Yves Saint Laurent'] + $product['Dior'] + $product['Versace'] + $product['Giorgio'] + $product['Montblanc'] + $product['Valentino'] + $product['Jo Malone'] + $product['CHANEL'] +  $product['origin_My'] + $product['origin_Y'] + $product['origin_Phap'] + $product['origin_Anh'] + $product['category_man'] + $product['category_women'] + pow($product['rating'] * 1 / 10, 2)));
+            array_push($arrMauSo, [$mauSo, $value['id']]);
+        }
+        $i = 0;
+        // var_dump($tu)
+        foreach ($arrTuSo as $value) {
+            $kq = $value[0] / $arrMauSo[$i][0];
+            array_push($arrKetQua, [$kq, $value[1]]);
+            $i++;
+        }
+
+        // sắp xếp tăng dần từ bé đến lớn
+        rsort($arrKetQua);
+        // lấy ra thông tin các sản phẩm đã sắp xếp
+        $arr_products = [];
+        foreach ($arrKetQua as $value) {
+            $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '100ml' AND products.id = product_detail.id_product AND products.id = " . $value[1];
+            $stmt = $this->conn->query($sql);
+            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+            array_push($arr_products, $product);
+        }
+        return $arr_products;
+    }
     //phân trang
     public function getTotalRecords()
     {

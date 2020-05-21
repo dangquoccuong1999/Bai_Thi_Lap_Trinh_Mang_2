@@ -45,16 +45,14 @@
                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="shop.html">Shop</a>
-                            <a class="dropdown-item" href="product-single.html">Single Product</a>
-                            <a class="dropdown-item" href="cart.html">Cart</a>
-                            <a class="dropdown-item" href="checkout.html">Checkout</a>
+                            <a class="dropdown-item" href="?page=shop">Shop All</a>
+                            <a class="dropdown-item" href="?page=cart">Cart</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['countCart'])) echo $_SESSION['countCart'] ?>]</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">User</a></li>
+					<li class="nav-item"><a href="" class="nav-link">Đăng Nhập</a></li>
+					<li class="nav-item"><a href="" class="nav-link">Đăng Xuất</a></li>
+                    <li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['total'])) echo $_SESSION['total'] ?>]</a></li>
 
                 </ul>
             </div>
@@ -77,7 +75,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mb-5 ftco-animate">
-                    <a href="images/menu-2.jpg" class="image-popup"><img src="View/<?php echo $this->getSingleProduct()[0]['img_product'] ?>" class="img-fluid" alt="Colorlib Template"></a>
+                    <a href="View/images/menu-2.jpg" class="image-popup"><img src="View/<?php echo $this->getSingleProduct()[0]['img_product'] ?>" class="img-fluid" alt="Colorlib Template"></a>
                 </div>
                 <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                     <h3><?php echo $this->getSingleProduct()[0]['name_product'] ?></h3>
@@ -89,168 +87,68 @@
                             <div class="form-group d-flex">
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                    <form method="get" action="">
-                                        <select name="capacity" id="" class="form-control" onchange="location= this.value">
-                                            <option value="">
-                                                <?php if (isset($_GET['capacity'])) {
-                                                    echo $_GET['capacity'];
-                                                } else {
-                                                    echo 'Chọn';
-                                                }
-                                                ?>
-                                            </option>
-                                            <?php foreach ($this->getSingleProduct()[1] as $capacity) { ?>
-                                                <option value="?page=single_product&id=<?php echo $this->getSingleProduct()[0]['id'] ?>&capacity=<?php echo $capacity['capacity'] ?>"><?php echo $capacity['capacity'] ?></option>
-                                            <?php } ?>
-                                        </select>
+
+                                    <form method="post" action="?page=single_product&id=<?php echo $_GET['id'] ?>">
+                                        <h5>Dung tích <?php echo $this->getSingleProduct()[0]['capacity']  ?> </h5>
+                                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+                                        <br>
+                                        <input type="submit" name="addcart" class="btn btn-primary py-3 px-5 addProduct" value="Add">
                                     </form>
+
                                 </div>
                             </div>
                         </div>
                         <div class="w-100"></div>
-                        <div class="input-group col-md-6 d-flex mb-3">
-                            <span class="input-group-btn mr-2">
-                                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
-                                    <i class="ion-ios-remove"></i>
-                                </button>
-                            </span>
-                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-                            <span class="input-group-btn ml-2">
-                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-                                    <i class="ion-ios-add"></i>
-                                </button>
-                            </span>
-                        </div>
                     </div>
-                    <p><a href="?page=addCart&id=<?php echo $_GET['id'] ?>&capacity=<?php echo $_GET['capacity'] ?>&quantity= " class="btn btn-primary py-3 px-5 addProduct">Add to Cart</a></p>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="ftco-section bg-light">
-		<div class="container">
-			<div class="row justify-content-center mb-3 pb-3">
-				<div class="col-md-12 heading-section text-center ftco-animate">
-					<h1 class="big">Products</h1>
-					<h2 class="mb-4">Related Products</h2>
-				</div>
-			</div>
-		</div>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="product">
-						<a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-1.jpg" alt="Colorlib Template"></a>
-						<div class="text py-3 px-3">
-							<h3><a href="#">Young Woman Wearing Dress</a></h3>
-							<div class="d-flex">
-								<div class="pricing">
-									<p class="price"><span>$120.00</span></p>
-								</div>
-								<div class="rating">
-									<p class="text-right">
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-									</p>
-								</div>
-							</div>
-							<hr>
-							<p class="bottom-area d-flex">
-								<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-								<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="product">
-						<a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-2.jpg" alt="Colorlib Template"></a>
-						<div class="text py-3 px-3">
-							<h3><a href="#">Young Woman Wearing Dress</a></h3>
-							<div class="d-flex">
-								<div class="pricing">
-									<p class="price"><span>$120.00</span></p>
-								</div>
-								<div class="rating">
-									<p class="text-right">
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-									</p>
-								</div>
-							</div>
-							<hr>
-							<p class="bottom-area d-flex">
-								<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-								<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="product">
-						<a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-3.jpg" alt="Colorlib Template"></a>
-						<div class="text py-3 px-3">
-							<h3><a href="#">Young Woman Wearing Dress</a></h3>
-							<div class="d-flex">
-								<div class="pricing">
-									<p class="price"><span>$120.00</span></p>
-								</div>
-								<div class="rating">
-									<p class="text-right">
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-									</p>
-								</div>
-							</div>
-							<hr>
-							<p class="bottom-area d-flex">
-								<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-								<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="product">
-						<a href="#" class="img-prod"><img class="img-fluid" src="View/images/product-4.jpg" alt="Colorlib Template"></a>
-						<div class="text py-3 px-3">
-							<h3><a href="#">Young Woman Wearing Dress</a></h3>
-							<div class="d-flex">
-								<div class="pricing">
-									<p class="price"><span>$120.00</span></p>
-								</div>
-								<div class="rating">
-									<p class="text-right">
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-										<span class="ion-ios-star-outline"></span>
-									</p>
-								</div>
-							</div>
-							<hr>
-							<p class="bottom-area d-flex">
-								<a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
-								<a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="container">
+            <div class="row justify-content-center mb-3 pb-3">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <h1 class="big">Products</h1>
+                    <h2 class="mb-4">Related Products</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <?php for ($i = 0; $i < 4; $i++) { ?>
+                    <div class="col-sm col-md-6 col-lg ftco-animate">
+                        <div class="product">
+                            <a href="?page=single_product&id=<?php echo $this->recommended_products()[$i]['id'] ?>" class="img-prod"><img class="img-fluid" src="View/<?php echo $this->recommended_products()[$i]['img_product'] ?>" alt="Colorlib Template"></a>
+                            <div class="text py-3 px-3">
+                                <h3><a href="?page=single_product&id=<?php echo $this->recommended_products()[$i]['id'] ?>"><?php echo $this->recommended_products()[$i]['name_product'] ?></a></h3>
+                                <div class="d-flex">
+                                    <div class="pricing">
+                                        <p class="price"><span><?php echo number_format($this->recommended_products()[$i]['price']) ?> VND</span></p>
+                                    </div>
+                                    <!-- <div class="rating">
+                                    <p class="text-right">
+                                        <span class="ion-ios-star-outline"></span>
+                                        <span class="ion-ios-star-outline"></span>
+                                        <span class="ion-ios-star-outline"></span>
+                                        <span class="ion-ios-star-outline"></span>
+                                        <span class="ion-ios-star-outline"></span>
+                                    </p>
+                                </div> -->
+                                </div>
+                                <hr>
+                                <!-- <p class="bottom-area d-flex">
+                                    <a href="#" class="add-to-cart"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+                                    <a href="#" class="ml-auto"><span><i class="ion-ios-heart-empty"></i></span></a>
+                                </p> -->
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
     </section>
-    
+
     <section class="ftco-section-parallax">
         <div class="parallax-img d-flex align-items-center">
             <div class="container">

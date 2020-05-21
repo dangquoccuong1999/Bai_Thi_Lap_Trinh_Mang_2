@@ -44,16 +44,14 @@
 					<li class="nav-item dropdown active">
 						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="shop.html">Shop</a>
-							<a class="dropdown-item" href="product-single.html">Single Product</a>
-							<a class="dropdown-item" href="cart.html">Cart</a>
-							<a class="dropdown-item" href="checkout.html">Checkout</a>
+							<a class="dropdown-item" href="?page=shop">Shop All</a>
+							<a class="dropdown-item" href="?page=cart">Cart</a>
 						</div>
 					</li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['countCart'])) echo $_SESSION['countCart'] ?>]</a></li>
+					<li class="nav-item"><a href="" class="nav-link">User</a></>
+					<li class="nav-item"><a href="" class="nav-link">Đăng Nhập</a></li>
+					<li class="nav-item"><a href="" class="nav-link">Đăng Xuất</a></li>
+					<li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['total'])) echo $_SESSION['total'] ?>]</a></li>
 
 				</ul>
 			</div>
@@ -91,9 +89,10 @@
 							</thead>
 							<tbody>
 								<?php
-								if (isset($_SESSION['countCart'])) {
-									$i = 0;
-									foreach ($this->productDb->cart() as $product) {
+								if (isset($_SESSION['cart'])) {
+									$tongTien = 0;
+									$tongSoLuong = 0;
+									foreach ($_SESSION['cart'] as $product) {
 								?>
 										<tr class="text-center">
 											<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
@@ -108,17 +107,19 @@
 											</td>
 
 											<td class="price"><?php echo number_format($product['price']) ?> VND</td>
-											<td><?php echo $_SESSION['cart'][$i]['capacity'] ?></td>
+											<td><?php echo  $product['capacity'] ?></td>
 											<td class="quantity">
 												<div class="input-group mb-3">
-													<input type="text" name="quantity" class="quantity form-control input-number" value="<?php echo $_SESSION['cart'][$i]['quantity_number'] ?>" min="1" max="100">
+													<input type="text" name="quantity" class="quantity form-control input-number" value="<?php echo $product['qty'] ?>" min="1" max="100">
 												</div>
 											</td>
 
-											<td class="total">$4.90</td>
+											<td class="total"><?php echo number_format(($product['price'] * $product['qty'])) ?> VND</td>
 										</tr><!-- END TR-->
+
 								<?php
-										$i++;
+										$tongTien += ($product['price'] * $product['qty']);
+										$tongSoLuong += $product['qty'];
 									}
 								} else {
 									echo "<tr><td></td><td></td><td></td><td>Không có sản phẩm nào</td></tr>";
@@ -134,21 +135,27 @@
 					<div class="cart-total mb-3">
 						<h3>Cart Totals</h3>
 						<p class="d-flex">
-							<span>Subtotal</span>
-							<span>$20.60</span>
+							<span>Tổng số lượng</span>
+							<span> <?php if (isset($tongSoLuong)) {
+										echo $tongSoLuong;
+									} else {
+										echo 0;
+									}
+									?>
+							</span>
 						</p>
-						<p class="d-flex">
-							<span>Delivery</span>
-							<span>$0.00</span>
-						</p>
-						<p class="d-flex">
+						<!-- <p class="d-flex">
 							<span>Discount</span>
-							<span>$3.00</span>
-						</p>
+							<span>$0.00</span>
+						</p> -->
 						<hr>
 						<p class="d-flex total-price">
-							<span>Total</span>
-							<span>$17.60</span>
+							<span>Tổng tiền</span>
+							<span><?php if (isset($tongTien)) {
+										echo number_format($tongTien);
+									} else {
+										echo 0;
+									} ?>VND</span>
 						</p>
 					</div>
 					<p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>

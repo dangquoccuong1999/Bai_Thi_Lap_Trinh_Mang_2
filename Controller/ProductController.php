@@ -28,86 +28,14 @@ class ProductController
         return $this->productDb->getAllProducts();
     }
 
-    public function trending()
+    public function shop()
     {
-        return $this->productDb->trending();
-    }
-
-    //single product
-    public function singleProduct()
-    {
-        include_once 'View/singleProduct.php';
-    }
-
-    public function getSingleProduct()
-    {
-        $id = $_GET['id'];
-
-        if (isset($_GET['capacity'])) {
-            $capacity = $_GET['capacity'];
-
-            return $this->productDb->getSingleProduct($id, $capacity);
-        } else {
-            $capacity = '100ml';
-            return $this->productDb->getSingleProduct($id, $capacity);
-        }
-    }
-
-    //giỏ hàng 
-    public function cart()
-    {
-        
-        include_once 'View/cart.php';
-    }
-
-    public function addCart()
-    {
-        if (!isset($_SESSION['countCart'])) {
-            $_SESSION['countCart'] = 1;
-            $_SESSION['cart'] = [];
-
-            $id = $_GET['id'];
-            $capacity = $_GET['capacity'];
-            $arr = [];
-            array_push($arr, ['id' => $id, 'capacity' => $capacity, 'quantity_number' => 1]);
-            $_SESSION['cart'] = $arr;
-            // var_dump($_SESSION['cart']);
-        } else {
-            $id = $_GET['id'];
-            $capacity = $_GET['capacity'];
-
-            $_SESSION['countCart'] = $_SESSION['countCart'];
-            $_SESSION['countCart']++;
-
-            $arr = $_SESSION['cart'];
-            $i = 0;
-            $checkAdd = true;
-
-            foreach ($arr as $array) {
-                if (in_array($id, $array) && in_array($capacity, $array)) {
-                    $_SESSION['cart'][$i]['quantity_number']++;
-                    $checkAdd = false;
-                }
-                $i++;
-            }
-            if ($checkAdd == true) {
-                array_push($arr, ['id' => $id, 'capacity' => $capacity, 'quantity_number' => 1]);
-                $_SESSION['cart'] = $arr;
-            }
-
-            var_dump($_SESSION['cart']);
-        }
-        $this->singleProduct();
-    }
-    // phân chia trang
-    public function pagination()
-    {
-        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $limit = 4;
+        $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
+        $limit = 8;
 
         //TÌM LIMIT VÀ CURRENT_PAGE
-        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $limit = 4;
+        $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
+        $limit = 8;
 
         //TÍNH TOÁN TOTAL_PAGE VÀ START
         $total_records = $this->productDb->getTotalRecords();
@@ -121,5 +49,98 @@ class ProductController
         }
 
         $productPagination = $this->productDb->pagination($current_page, $limit);
+        include_once 'View/shop.php';
     }
+
+    public function trending()
+    {
+        return $this->productDb->trending();
+    }
+
+    //single product
+    public function singleProduct()
+    {
+        $this->addCart();
+        include_once 'View/singleProduct.php';
+    }
+
+    public function getSingleProduct()
+    {
+        $id = $_GET['id'];
+        $capacity = '100ml';
+        return $this->productDb->getSingleProduct($id, $capacity);
+    }
+
+    //giỏ hàng 
+    public function cart()
+    {
+        include_once 'View/cart.php';
+    }
+
+    public function addCart()
+    {
+        if (isset($_POST['addcart'])) {
+            $quantity = $_POST['quantity'];
+            $capacity = "100ml";
+            $id = $_GET['id'];
+            $product = $this->getSingleProduct()[0];
+            if (!isset($_SESSION['cart']) || $_SESSION['cart'] == null) { // chưa có sản phẩm nào trong giỏ hàng
+                $product['qty'] = 1;
+                $_SESSION['cart'][$id] = $product;
+            } else {
+                if (array_key_exists($id, $_SESSION['cart'])) { // kiểm tra xem id có tồn tại trong mảng cart không
+                    $_SESSION['cart'][$id]['qty'] += $quantity; // tăng số lượng sản phẩm của sản phẩm đã có trong giỏ hàng
+                } else { // ngược lại nếu không có thì thêm mới
+                    $product['qty'] = $quantity;
+                    $_SESSION['cart'][$id] = $product;
+                }
+            }
+
+            $total = 0;
+            if (isset($_SESSION['cart']) && $_SESSION['cart'] != null) {
+                foreach ($_SESSION['cart'] as $list) {
+                    $total += $list['qty']; //cộng tổng số lượng các sản phẩm lại
+                }
+            }
+            $_SESSION['total'] = $total;
+        }
+    }
+
+    //thêm sản phẩm từ shop.php
+    public function addCartToShop()
+    {
+        $quantity = 1;
+        $capacity = "100ml";
+        $id = $_GET['id'];
+        $product = $this->getSingleProduct()[0];
+        if (!isset($_SESSION['cart']) || $_SESSION['cart'] == null) { // chưa có sản phẩm nào trong giỏ hàng
+            $product['qty'] = 1;
+            $_SESSION['cart'][$id] = $product;
+        } else {
+            if (array_key_exists($id, $_SESSION['cart'])) { // kiểm tra xem id có tồn tại trong mảng cart không
+                $_SESSION['cart'][$id]['qty'] += $quantity; // tăng số lượng sản phẩm của sản phẩm đã có trong giỏ hàng
+            } else { // ngược lại nếu không có thì thêm mới
+                $product['qty'] = $quantity;
+                $_SESSION['cart'][$id] = $product;
+            }
+        }
+
+        $total = 0;
+        if (isset($_SESSION['cart']) && $_SESSION['cart'] != null) {
+            foreach ($_SESSION['cart'] as $list) {
+                $total += $list['qty']; //cộng tổng số lượng các sản phẩm lại
+            }
+        }
+        $_SESSION['total'] = $total;
+        header('Location: index.php?page=shop');
+    }
+
+    //gợi ý sản phẩm 
+    public function recommended_products()
+    {
+        return $this->productDb->recommended_products();
+    }
+
+    // phân chia trang
+
 }
