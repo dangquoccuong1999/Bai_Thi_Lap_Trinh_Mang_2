@@ -108,7 +108,7 @@
                 <b style="color: red ;text-align: center"><?php if(isset($_SESSION['error']))echo $_SESSION['error'] ?></b>
                 <div class="mt-4">
                     <div class="d-flex justify-content-center links">
-                        Don't have an account? <a href="#" class="ml-2">Sign Up</a>
+                        Don't have an account? <a href="?page=dangKi" class="ml-2">Sign Up</a>
                     </div>
                     <div class="d-flex justify-content-center links">
                         <a href="#">Forgot your password?</a>

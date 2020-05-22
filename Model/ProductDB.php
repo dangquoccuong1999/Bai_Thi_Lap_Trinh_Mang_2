@@ -193,4 +193,29 @@ class ProductDB
         $sql = "UPDATE users SET email='$email',password='$password' WHERE id= '$id'";
         $stmt = $this->conn->query($sql);
     }
+
+    public function checkUserTonTaiChua($user)
+    {
+        $sql = "SELECT * FROM `users` WHERE user = '$user'";
+        $stmt = $this->conn->query($sql);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    public function singup($user, $name, $phone, $email, $address, $pass1, $sex, $birthday)
+    {
+        $sql = "INSERT INTO users (user, email, password)
+                VALUES ('$user','$email','$pass1');";
+        $stmt = $this->conn->query($sql);
+
+        $sql = "SELECT MAX(id) AS id FROM users";
+        $stmt = $this->conn->query($sql);
+        $id_user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $id_user =  $id_user['id'];
+
+        $sql = "INSERT INTO customer (id_user, name,date_of_birth,address,number_phone,sex)
+        VALUES ('$id_user','$name','$birthday','$address','$phone','$sex');";
+        $stmt = $this->conn->query($sql);
+    }
+
 }

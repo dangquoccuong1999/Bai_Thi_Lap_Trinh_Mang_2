@@ -71,7 +71,7 @@
                             </div>
                         </li>
                     <?php } else {
-                        echo "<li class='nav-item'><a href='?page=login' class='nav-link'>Đăng Kí</a></li>";
+                        echo "<li class='nav-item'><a href='?page=dangKi' class='nav-link'>Đăng Kí</a></li>";
                     } ?>
                     <li class="nav-item"><a href="?page=login" class="nav-link">Đăng Nhập</a></li>
                     <li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['total'])) echo $_SESSION['total'] ?>]</a></li>
@@ -156,7 +156,7 @@
                                         <label for="email">
                                             <h4>Date of birth</h4>
                                         </label>
-                                        <input type="text" class="form-control" name = "day" id="address" value="<?php echo $_SESSION['user']['date_of_birth'] ?>" title="enter a address">
+                                        <input type="date" class="form-control" name = "day" id="address" value="<?php echo $_SESSION['user']['date_of_birth'] ?>" title="enter a address">
                                     </div>
                                 </div>
 
@@ -203,7 +203,7 @@
     </div>
     <style>
         .noidung {
-            background-color: #60a3bc;
+            background-color: #ad93d5;
             width: 100%;
             height: 100%;
         }

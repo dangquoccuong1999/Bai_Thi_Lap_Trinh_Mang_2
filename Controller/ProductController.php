@@ -194,7 +194,7 @@ class ProductController
             $pass2 = $_POST['password2'];
             $phone = $_POST['phone'];
             $address = $_POST['address'];
-            $dateOfBirth = $_POST['day'];
+            $birthday = $_POST['day'];
             if ($name == "") {
                 $thongBao = "Tên không được để trống !";
             } else {
@@ -204,23 +204,30 @@ class ProductController
                     if ($sex == "") {
                         $thongBao = "Giới tính không được để trống !";
                     } else {
+                        if ($sex != 'nam' || $sex != 'Nam' || $sex != 'nữ' || $sex != 'Nữ') {
+                            $sex = "Khác";
+                        }
                         if ($phone == "") {
                             $thongBao = "Số điện thoại không được để trống !";
                         } else {
                             if ($address == "") {
                                 $thongBao = "Địa chỉ không được để trống !";
                             } else {
-                                if ($dateOfBirth == "") {
+                                if ($birthday == "") {
                                     $thongBao = "Ngày sinh không được để trống !";
                                 } else {
                                     if ($pass1 == "" || $pass2 == "") {
                                         $thongBao = "Mật khẩu không được để trống !";
                                     } else {
                                         if ($pass1 == $pass2) {
-                                            $this->productDb->updateUser($name, $phone, $email, $address, $pass1, $sex, $dateOfBirth);
-                                            $data = $this->productDb->login($_SESSION['user']['user'], $pass1);
-                                            $_SESSION['user'] = $data;
-                                            $thongBao = "Đã cập nhật thành công !";
+                                            if (count($pass1) >= 6) {
+                                                $this->productDb->updateUser($name, $phone, $email, $address, $pass1, $sex, $birthday);
+                                                $data = $this->productDb->login($_SESSION['user']['user'], $pass1);
+                                                $_SESSION['user'] = $data;
+                                                $thongBao = "Đã cập nhật thành công !";
+                                            } else {
+                                                $thongBao = "Mật khẩu phải có chiều dàn lớn hơn 5 kí tự";
+                                            }
                                         } else {
                                             $thongBao = "Mật khẩu phải trùng nhau !";
                                         }
@@ -262,8 +269,71 @@ class ProductController
         header('Location: index.php?page=cart');
     }
 
+
     public function dangKi()
     {
-        include 'View/dangKi.php';
+        if (isset($_POST['submitSingUp'])) {
+            $user = $_POST['user'];
+            $pass1 = $_POST['pass1'];
+            $pass2 = $_POST['pass2'];
+            $name = $_POST['name'];
+            $birthday = $_POST['birthday'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            $address = $_POST['address'];
+            if (isset($_POST['gender'])) {
+                $sex = $_POST['gender'];
+            } else {
+                $sex = "Khác";
+            }
+
+            if ($name == "") {
+                $thongBao = "Tên không được để trống !";
+            } else {
+                if ($email == "") {
+                    $thongBao = "Email không được để trống !";
+                } else {
+                    if ($sex == "") {
+                        $thongBao = "Giới tính không được để trống !";
+                    } else {
+                        if ($sex != 'nam' || $sex != 'Nam' || $sex != 'nữ' || $sex != 'Nữ') {
+                            $sex = "Khác";
+                        }
+                        if ($phone == "") {
+                            $thongBao = "Số điện thoại không được để trống !";
+                        } else {
+                            if ($address == "") {
+                                $thongBao = "Địa chỉ không được để trống !";
+                            } else {
+                                if ($birthday == "") {
+                                    $thongBao = "Ngày sinh không được để trống !";
+                                } else {
+                                    if ($pass1 == "" || $pass2 == "") {
+                                        $thongBao = "Mật khẩu không được để trống !";
+                                    } else {
+                                        if ($pass1 == $pass2) {
+                                            if (count($pass1) >= 6) {
+                                                $checkUser = $this->productDb->checkUserTonTaiChua($user);
+                                                if (empty($checkUser)) {
+                                                    $this->productDb->singup($user, $name, $phone, $email, $address, $pass1, $sex, $birthday);
+                                                    $thongBao = "Đã đăng kí thành công !";
+                                                } else {
+                                                    $thongBao = "Tài khoản đã tồn tại";
+                                                }
+                                            } else {
+                                                $thongBao = "Mật khẩu phải có chiều dàn lớn hơn 5 kí tự";
+                                            }
+                                        } else {
+                                            $thongBao = "Mật khẩu phải trùng nhau !";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        include 'View/singup.php';
     }
 }
