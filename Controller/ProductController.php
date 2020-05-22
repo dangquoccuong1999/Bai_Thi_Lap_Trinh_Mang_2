@@ -220,7 +220,7 @@ class ProductController
                                         $thongBao = "Mật khẩu không được để trống !";
                                     } else {
                                         if ($pass1 == $pass2) {
-                                            if (count($pass1) >= 6) {
+                                            if (strlen($pass1) >= 6) {
                                                 $this->productDb->updateUser($name, $phone, $email, $address, $pass1, $sex, $birthday);
                                                 $data = $this->productDb->login($_SESSION['user']['user'], $pass1);
                                                 $_SESSION['user'] = $data;
@@ -312,7 +312,7 @@ class ProductController
                                         $thongBao = "Mật khẩu không được để trống !";
                                     } else {
                                         if ($pass1 == $pass2) {
-                                            if (count($pass1) >= 6) {
+                                            if (strlen($pass1) >= 6) {
                                                 $checkUser = $this->productDb->checkUserTonTaiChua($user);
                                                 if (empty($checkUser)) {
                                                     $this->productDb->singup($user, $name, $phone, $email, $address, $pass1, $sex, $birthday);
