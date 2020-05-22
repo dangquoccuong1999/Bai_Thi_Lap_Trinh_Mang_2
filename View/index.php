@@ -57,7 +57,7 @@
                             </div>
                         </li>
                     <?php } else {
-                        echo "<li class='nav-item'><a href='?page=login' class='nav-link'>Đăng Kí</a></li>";
+						echo "<li class='nav-item'><a href='?page=dangKi' class='nav-link'>Đăng Kí</a></li>";
                     } ?>
                     <li class="nav-item"><a href="?page=login" class="nav-link">Đăng Nhập</a></li>
                     <li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['total'])) echo $_SESSION['total'] ?>]</a></li>

@@ -39,30 +39,30 @@
 			</button>
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
-			<ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="?" class="nav-link">Home</a></li>
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="?page=shop">Shop All</a>
-                            <a class="dropdown-item" href="?page=cart">Cart</a>
-                        </div>
-                    </li>
-                    <?php if (isset($_SESSION['user'])) { ?>
-                        <li class="nav-item dropdown active">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php if (isset($_SESSION['user'])) echo  $_SESSION['user']['user'] ?></a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="?page=userProfile">Tài khoản của tôi</a>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a href="?" class="nav-link">Home</a></li>
+					<li class="nav-item dropdown active">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item" href="?page=shop">Shop All</a>
+							<a class="dropdown-item" href="?page=cart">Cart</a>
+						</div>
+					</li>
+					<?php if (isset($_SESSION['user'])) { ?>
+						<li class="nav-item dropdown active">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php if (isset($_SESSION['user'])) echo  $_SESSION['user']['user'] ?></a>
+							<div class="dropdown-menu" aria-labelledby="dropdown04">
+								<a class="dropdown-item" href="?page=userProfile">Tài khoản của tôi</a>
 								<a class="dropdown-item" href="?page=logout">Đăng xuất</a>
-                            </div>
-                        </li>
-                    <?php } else {
-                        echo "<li class='nav-item'><a href='?page=login' class='nav-link'>Đăng Kí</a></li>";
-                    } ?>
-                    <li class="nav-item"><a href="?page=login" class="nav-link">Đăng Nhập</a></li>
-                    <li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['total'])) echo $_SESSION['total'] ?>]</a></li>
+							</div>
+						</li>
+					<?php } else {
+						echo "<li class='nav-item'><a href='?page=login' class='nav-link'>Đăng Kí</a></li>";
+					} ?>
+					<li class="nav-item"><a href="?page=login" class="nav-link">Đăng Nhập</a></li>
+					<li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['total'])) echo $_SESSION['total'] ?>]</a></li>
 
-                </ul>
+				</ul>
 			</div>
 		</div>
 	</nav>
@@ -98,20 +98,22 @@
 							</thead>
 							<tbody>
 								<?php
-								if (isset($_SESSION['cart'])) {
+								if (isset($_SESSION['cart']) && $_SESSION['cart'] != []) {
 									$tongTien = 0;
 									$tongSoLuong = 0;
-									foreach ($_SESSION['cart'] as $product) {
+							
+									foreach ($_SESSION['cart'] as $key => $product) {
+
 								?>
 										<tr class="text-center">
-											<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+											<td class="product-remove"><a href="?page=xoaSanPham&id=<?php echo $key ?>"><span class="ion-ios-close"></span></a></td>
 
 											<td class="image-prod">
 												<div class="img" style="background-image:url(View/<?php echo $product['img_product'] ?>);"></div>
 											</td>
 
 											<td class="product-name">
-												<h3><?php echo $product['name_product'] ?></h3>
+												<h3><a href="?page=single_product&id=<?php echo $product['id'] ?>"><?php echo $product['name_product'] ?></a></h3>
 												<p><?php echo $product['description'] ?></p>
 											</td>
 
@@ -119,7 +121,7 @@
 											<td><?php echo  $product['capacity'] ?></td>
 											<td class="quantity">
 												<div class="input-group mb-3">
-													<input type="text" name="quantity" class="quantity form-control input-number" value="<?php echo $product['qty'] ?>" min="1" max="100">
+													<input type="text" name="quantity" class="quantity form-control input-number" disabled value="<?php echo $product['qty'] ?>">
 												</div>
 											</td>
 
@@ -162,12 +164,14 @@
 							<span>Tổng tiền</span>
 							<span><?php if (isset($tongTien)) {
 										echo number_format($tongTien);
+										$_SESSION['tongTien'] = $tongTien;
 									} else {
 										echo 0;
 									} ?>VND</span>
 						</p>
 					</div>
-					<p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+					<b><?php if (isset($thongbao)) echo $thongbao ?></b>
+					<p class="text-center"><a href="?page=checkOut" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
 				</div>
 			</div>
 		</div>

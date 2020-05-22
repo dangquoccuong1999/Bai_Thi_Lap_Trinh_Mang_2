@@ -60,16 +60,38 @@ class ProductDB
     //car
     public function checkOut()
     {
-        $sql = "";
-        $stmt = $this->conn->query($sql);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //  lấy thời gian hiện tại của hệ thống
+        $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
 
-        // var_dump($products);
-        // lấy thời gian hiện tại của hệ thống
-        // $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
-        // echo $date->format('d-m-Y H:i:s');
-        //  var_dump($products);
-        // return $products;
+        $dayHienTai = $date->format('d-m-Y H:i:s');
+        $id = $_SESSION['user']['id'];
+        $tongTien = $_SESSION['tongTien'];
+        $sql = "INSERT INTO bill (id_customer,date,total_money) 
+                VALUES ('$id','$dayHienTai','$tongTien')";
+        $stmt = $this->conn->query($sql);
+
+        $sql = "SELECT MAX(id) AS id  FROM `bill`";
+        $stmt = $this->conn->query($sql);
+        $id_bill = $stmt->fetch(PDO::FETCH_ASSOC);
+        $id_bill = $id_bill['id'];
+        $capacity = "100ml";
+        foreach ($_SESSION['cart'] as $product) {
+            $id_product = $product['id'];
+            $qty = $product['qty'];
+            $soLuongSanPhamTrongKho = $product['quantity_number']; // lấy ra số lượng ở trong kho 
+            $soLuongSanPhamTrongKho -= $qty; // trừ đi số lượng sản phẩm đã được mua
+
+            //update số lượng hàng của sản phẩm đó trong kho
+            $sql = "UPDATE product_detail
+                    SET quantity_number = '$soLuongSanPhamTrongKho'
+                    WHERE id_product = '$id_product'";
+            $stmt = $this->conn->query($sql);
+
+            //thêm vào bảng bill_details
+            $sql = "INSERT INTO bill_details (id_bill,id_product,quantity_number,capacity) 
+                    VALUES ('$id_bill','$id_product','$qty','$capacity')";
+            $stmt = $this->conn->query($sql);
+        }
     }
 
     // gợi ý sản phẩm 
@@ -162,7 +184,7 @@ class ProductDB
         return $data;
     }
 
-    public function updateUser($name, $phone, $email, $address, $password,$sex,$dateOfBirth)
+    public function updateUser($name, $phone, $email, $address, $password, $sex, $dateOfBirth)
     {
         $id = $_SESSION['user']['id'];
         $sql = "UPDATE customer SET name = '$name', number_phone ='$phone', address ='$address', date_of_birth ='$dateOfBirth', sex ='$sex' WHERE id_user = '$id'";

@@ -79,30 +79,36 @@ class ProductController
 
     public function addCart()
     {
-        if (isset($_POST['addcart'])) {
-            $quantity = $_POST['quantity'];
-            $capacity = "100ml";
-            $id = $_GET['id'];
-            $product = $this->getSingleProduct()[0];
-            if (!isset($_SESSION['cart']) || $_SESSION['cart'] == null) { // chưa có sản phẩm nào trong giỏ hàng
-                $product['qty'] = 1;
-                $_SESSION['cart'][$id] = $product;
-            } else {
-                if (array_key_exists($id, $_SESSION['cart'])) { // kiểm tra xem id có tồn tại trong mảng cart không
-                    $_SESSION['cart'][$id]['qty'] += $quantity; // tăng số lượng sản phẩm của sản phẩm đã có trong giỏ hàng
-                } else { // ngược lại nếu không có thì thêm mới
-                    $product['qty'] = $quantity;
-                    $_SESSION['cart'][$id] = $product;
-                }
-            }
+        if (isset($_SESSION['user'])) {
+            if (isset($_POST['addcart'])) {
+                $quantity = $_POST['quantity'];
+                $capacity = "100ml";
+                $id = $_GET['id'];
+                $product = $this->getSingleProduct()[0];
+                if (is_numeric($quantity) && $quantity != "") {
+                    if (!isset($_SESSION['cart']) || $_SESSION['cart'] == null) { // chưa có sản phẩm nào trong giỏ hàng
+                        $product['qty'] = $quantity;
+                        $_SESSION['cart'][$id] = $product;
+                    } else {
+                        if (array_key_exists($id, $_SESSION['cart'])) { // kiểm tra xem id có tồn tại trong mảng cart không
+                            $_SESSION['cart'][$id]['qty'] += $quantity; // tăng số lượng sản phẩm của sản phẩm đã có trong giỏ hàng
+                        } else { // ngược lại nếu không có thì thêm mới
+                            $product['qty'] = $quantity;
+                            $_SESSION['cart'][$id] = $product;
+                        }
+                    }
 
-            $total = 0;
-            if (isset($_SESSION['cart']) && $_SESSION['cart'] != null) {
-                foreach ($_SESSION['cart'] as $list) {
-                    $total += $list['qty']; //cộng tổng số lượng các sản phẩm lại
+                    $total = 0;
+                    if (isset($_SESSION['cart']) && $_SESSION['cart'] != null) {
+                        foreach ($_SESSION['cart'] as $list) {
+                            $total += $list['qty']; //cộng tổng số lượng các sản phẩm lại
+                        }
+                    }
+                    $_SESSION['total'] = $total;
                 }
             }
-            $_SESSION['total'] = $total;
+        } else {
+            header('Location: index.php?page=login');
         }
     }
 
@@ -229,11 +235,35 @@ class ProductController
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         unset($_SESSION['user']);
         unset($_SESSION['cart']);
         unset($_SESSION['total']);
         header('Location: index.php');
     }
 
+    public function checkOut()
+    {
+        $this->productDb->checkOut();
+        $thongbao = "Bạn đã mua thành công";
+        unset($_SESSION['cart']);
+        unset($_SESSION['total']);
+        unset($_SESSION['tongTien']);
+        include 'View/cart.php';
+    }
+
+    public function xoaSanPham()
+    {
+        $id = $_GET['id']; // lấy id sp cần xóa
+        $qty = $_SESSION['cart'][$id]['qty'];
+        $_SESSION['total'] -=  $qty;
+        unset($_SESSION['cart'][$id]);
+        header('Location: index.php?page=cart');
+    }
+
+    public function dangKi()
+    {
+        include 'View/dangKi.php';
+    }
 }

@@ -54,11 +54,11 @@
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php if (isset($_SESSION['user'])) echo  $_SESSION['user']['user'] ?></a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
                                 <a class="dropdown-item" href="?page=userProfile">Tài khoản của tôi</a>
-								<a class="dropdown-item" href="?page=logout">Đăng xuất</a>
+                                <a class="dropdown-item" href="?page=logout">Đăng xuất</a>
                             </div>
                         </li>
                     <?php } else {
-                        echo "<li class='nav-item'><a href='?page=login' class='nav-link'>Đăng Kí</a></li>";
+                        echo "<li class='nav-item'><a href='?page=dangKi' class='nav-link'>Đăng Kí</a></li>";
                     } ?>
                     <li class="nav-item"><a href="?page=login" class="nav-link">Đăng Nhập</a></li>
                     <li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['total'])) echo $_SESSION['total'] ?>]</a></li>
@@ -99,7 +99,7 @@
 
                                     <form method="post" action="?page=single_product&id=<?php echo $_GET['id'] ?>">
                                         <h5>Dung tích <?php echo $this->getSingleProduct()[0]['capacity']  ?> </h5>
-                                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+                                        <input type="number" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
                                         <br>
                                         <input type="submit" name="addcart" class="btn btn-primary py-3 px-5 addProduct" value="Add">
                                     </form>

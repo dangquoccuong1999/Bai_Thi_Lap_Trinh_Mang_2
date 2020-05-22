@@ -32,6 +32,15 @@ switch ($page) {
     case 'logout':
         $productController->logout();
         break;
+    case 'checkOut':
+        $productController->checkOut();
+        break;
+    case 'dangKi':
+        $productController->dangKi();
+        break;
+    case 'xoaSanPham':
+        $productController->xoaSanPham();
+        break;
     default:
         $productController->index();
         break;
