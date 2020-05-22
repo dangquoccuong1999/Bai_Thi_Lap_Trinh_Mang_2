@@ -44,8 +44,16 @@
                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="?page=admin&user">List user</a>
-                            <a class="dropdown-item" href="?page=adminProduct&product">Add Product</a>
+                            <?php if (isset($_SESSION['user'])) {
+                                if ($_SESSION['user']['role'] == '1') {
+                                    echo "<a class='dropdown-item' href='?page=admin&user'>List user</a>";
+                                    echo "<a class='dropdown-item' href='?page=adminProduct&product'>Add Product</a>";
+                                } else {
+                                    echo "<a class='dropdown-item' href='?page=shop'>List user</a>";
+                                }
+                            } else {
+                                echo "<a class='dropdown-item' href='?page=shop'>List user</a>";
+                            } ?>
                         </div>
                     </li>
                     <?php if (isset($_SESSION['user'])) { ?>
@@ -65,60 +73,52 @@
         </div>
     </nav>
     <!-- END nav -->
-    <?php if (isset($_GET['user'])) { ?>
+    <br>
+    <div style="margin-top:50px">
+        <h1>Danh sách người dùng</h1>
         <br>
-        <div style="margin-top:50px">
-            <h1>Danh sách người dùng</h1>
-            <h3><a href="?page=adminAdd">Thêm user</a></h3>
-            <br>
-            <br>
-            <form action="?page=adminUpdate" method="post">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">user</th>
-                            <th scope="col">pass</th>
-                            <th scope="col">email</th>
-                            <th scope="col">name</th>
-                            <th scope="col">birthday</th>
-                            <th scope="col">address</th>
-                            <th scope="col">number phone</th>
-                            <th scope="col">sex</th>
-                            <th scope="col">Xóa</th>
-                        </tr>
-                    </thead>
-                    <?php foreach ($users as $user) { ?>
-                        <?php if ($user['role'] != 1) { ?>
-                            <tbody>
-                                <tr>
-                                    <th scope="row"><?php echo $user['id'] ?></th>
-                                    <td><?php echo $user['user'] ?></td>
-                                    <td><?php echo $user['password'] ?></td>
-                                    <td><input value="<?php echo $user['email'] ?>" name="email[<?php echo $user['id'] ?>]" type="email"></td>
-                                    <td><input value="<?php echo $user['name'] ?>" name="name[<?php echo $user['id'] ?>]" type="text"></td>
-                                    <td><?php echo $user['date_of_birth'] ?></td>
-                                    <td><input value="<?php echo $user['address'] ?>" name="address[<?php echo $user['id'] ?>]" type="text"></td>
-                                    <td><input value="<?php echo $user['number_phone'] ?>" style="width:60%" name="number_phone[<?php echo $user['id'] ?>]" type="text"></td>
-                                    <td><input value="<?php echo $user['sex'] ?>" style="width:30%" name="sex[<?php echo $user['id'] ?>]" type="text"></td>
-                                    <td><a href="?page=adminDelete&id=<?php echo $user['id'] ?>">Delete</a></td>
-                                </tr>
-                            </tbody>
-                    <?php
-                        }
-                    } ?>
-                </table>
-                <p align="right">
-                    <input type="submit" value="Update" name="update">
-                </p>
-            </form>
-           <?php if (isset($_SESSION['thongBaoCapNhatAdmin'])) { ?>
-                <div class="alert alert-danger" role="alert">
-                    <strong><?php echo $_SESSION['thongBaoCapNhatAdmin'] ?> !</strong>
-                </div>
-            <?php } ?> 
-        </div>
-    <?php } ?>
+        <br>
+        <form action="?page=adminAdd" method="post">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">user</th>
+                        <th scope="col">password_1</th>
+                        <th scope="col">password_2</th>
+                        <th scope="col">email</th>
+                        <th scope="col">name</th>
+                        <th scope="col">birthday</th>
+                        <th scope="col">address</th>
+                        <th scope="col">number phone</th>
+                        <th scope="col">sex</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="user"></td>
+                        <td><input type="password" name="pass1"></td>
+                        <td><input type="password" name="pass2"></td>
+                        <td><input name="email" type="email"></td>
+                        <td><input name="name"></td>
+                        <td><input name="birthday" type="date"></td>
+                        <td><input type="text" name="address"></td>
+                        <td><input type="text" value="" style="width:60%" name="number_phone"></td>
+                        <td><input style="width:30%" name="sex"></td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <p align="right">
+                <input type="submit" value="Add" name="addUser">
+            </p>
+        </form>
+        <?php if (isset($thongBao)) { ?>
+            <div class="alert alert-danger" role="alert">
+                <strong><?php echo $thongBao ?></strong>
+            </div>
+        <?php } ?>
+    </div>
     <section class="ftco-section-parallax">
         <div class="parallax-img d-flex align-items-center">
             <div class="container">

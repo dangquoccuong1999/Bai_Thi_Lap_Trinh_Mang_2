@@ -56,6 +56,9 @@ switch ($page) {
     case 'adminAdd':
         $adminController->add();
         break;
+    case 'adminProduct':
+        $adminController->adminProduct();
+        break;
     default:
         $productController->index();
         break;

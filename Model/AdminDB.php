@@ -36,9 +36,16 @@ class AdminDB
     {
         $sql = "DELETE FROM customer WHERE id_user = $id;";
         $stmt = $this->conn->query($sql);
-        
+
         $sql = "DELETE FROM users WHERE id = $id;";
         $stmt = $this->conn->query($sql);
-       
+    }
+
+    public function getAllProducts()
+    {
+        $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '100ml' AND products.id = product_detail.id_product";
+        $stmt = $this->conn->query($sql);
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $products;
     }
 }

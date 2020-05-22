@@ -40,7 +40,7 @@ class AdminController
                                 if ($sex[$user['id']] == "nam" || $sex[$user['id']] == "Nam" || $sex[$user['id']] == "nữ" || $sex[$user['id']] == "Nữ" || $sex[$user['id']] == "Khác" || $sex[$user['id']] == "khác") {
                                     if (!empty($phone[$user['id']])) {
                                         if (is_numeric($phone[$user['id']]) && $phone[$user['id']] - (int) $phone[$user['id']] == 0) {
-                                            if (!empty($address[$user['id']])) {                              
+                                            if (!empty($address[$user['id']])) {
                                                 $this->adminDB->updateUser($user['id'], $name[$user['id']], $phone[$user['id']], $email[$user['id']], $address[$user['id']], $sex[$user['id']]);
                                                 $_SESSION['thongBaoCapNhatAdmin'] = "Bạn Đã Cập Nhật Thành Công";
                                             } else {
@@ -64,7 +64,6 @@ class AdminController
                     } else {
                         $_SESSION['thongBaoCapNhatAdmin'] = "Email Của id " . $user['id'] . " Không Được Để Trống";
                     }
-                 
                 }
             }
             header('Location: index.php?page=admin&user');
@@ -142,6 +141,14 @@ class AdminController
                 }
             }
         }
-        include 'View/adminAdd.php';
+        include 'View/adminAddUser.php';
     }
+
+    public function adminProduct()
+    {
+        $products = $this->adminDB->getAllProducts();
+        include 'View/adminAddProduct.php';
+    }
+
+
 }

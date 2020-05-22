@@ -45,7 +45,6 @@
 						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="?page=shop">Shop All</a>
-							<a class="dropdown-item" href="?page=cart">Cart</a>
 						</div>
 					</li>
 					<?php if (isset($_SESSION['user'])) { ?>

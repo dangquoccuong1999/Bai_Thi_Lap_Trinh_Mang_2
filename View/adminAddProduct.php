@@ -45,7 +45,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="?page=admin&user">List user</a>
-                            <a class="dropdown-item" href="?page=cart">Cart</a>
+                            <a class="dropdown-item" href="?page=adminProduct&product">Add Product</a>
                         </div>
                     </li>
                     <?php if (isset($_SESSION['user'])) { ?>
@@ -65,52 +65,60 @@
         </div>
     </nav>
     <!-- END nav -->
-    <br>
-    <div style="margin-top:50px">
-        <h1>Danh sách người dùng</h1>
+    <?php if (isset($_GET['product'])) { ?>
         <br>
-        <br>
-        <form action="?page=adminAdd" method="post">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">user</th>
-                        <th scope="col">password_1</th>
-                        <th scope="col">password_2</th>
-                        <th scope="col">email</th>
-                        <th scope="col">name</th>
-                        <th scope="col">birthday</th>
-                        <th scope="col">address</th>
-                        <th scope="col">number phone</th>
-                        <th scope="col">sex</th>
-                    </tr>
-                </thead>
+        <div style="margin-top:50px">
+            <h1>Danh sách người dùng</h1>
+            <h3><a href="?page=adminAdd">Thêm user</a></h3>
+            <br>
+            <br>
+            <form action="?page=adminUpdate" method="post">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Name Product</th>
+                            <th scope="col">Name Producer</th>
+                            <th scope="col">Origin</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Img_product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Capacity</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Xóa</th>
+                        </tr>
+                    </thead>
+                    <?php foreach ($products as $product) { ?>
 
-                <tbody>
-                    <tr>
-                        <td><input type="text" name="user"></td>
-                        <td><input type="password" name="pass1"></td>
-                        <td><input type="password" name="pass2"></td>
-                        <td><input name="email" type="email"></td>
-                        <td><input name="name"></td>
-                        <td><input name="birthday" type="date"></td>
-                        <td><input type="text" name="address"></td>
-                        <td><input type="text" value="" style="width:60%" name="number_phone"></td>
-                        <td><input style="width:30%" name="sex"></td>
-                    </tr>
-                </tbody>
-
-            </table>
-            <p align="right">
-                <input type="submit" value="Add" name="addUser">
-            </p>
-        </form>
-        <?php if (isset($thongBao)) { ?>
-            <div class="alert alert-danger" role="alert">
-                <strong><?php echo $thongBao ?></strong>
-            </div>
-        <?php } ?>
-    </div>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><?php echo $product['id'] ?></th>
+                                <td><input value="<?php echo $product['name_product'] ?>"></td>
+                                <td><input value="<?php echo $product['name_producer'] ?>"></td>
+                                <td><input value="<?php echo $product['origin'] ?>"></td>
+                                <td><input value="<?php echo $product['description'] ?>"></td>
+                                <td><input value="<?php echo $product['category'] ?>"></td>
+                                <td><img src="View/<?php echo $product['img_product'] ?>" style ="width:100px"></td>
+                                <td><input value="<?php echo $product['price'] ?>"></td>
+                                <td><input value="<?php echo $product['capacity'] ?>"></td>
+                                <td><input value="<?php echo $product['quantity_number'] ?>"></td>
+                                <td><a href="?page=adminDelete&id=<?php echo $user['id'] ?>">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    <?php  } ?>
+                </table>
+                <p align="right">
+                    <input type="submit" value="Update" name="update">
+                </p>
+            </form>
+            <?php if (isset($_SESSION['thongBaoCapNhatProduct'])) { ?>
+                <div class="alert alert-danger" role="alert">
+                    <strong><?php echo $_SESSION['thongBaoCapNhatProduct'] ?> !</strong>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
     <section class="ftco-section-parallax">
         <div class="parallax-img d-flex align-items-center">
             <div class="container">
