@@ -40,14 +40,32 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light ftco-navbar-light-2 " id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="?">Modist</a>
+            <?php if (isset($_SESSION['user'])) {
+                if ($_SESSION['user']['role'] == '1') {
+                    echo "<a class='navbar-brand' href='?page=admin&user'>Modist</a>";
+                } else {
+                    echo " <a class='navbar-brand' href='?'>Modist</a>";
+                }
+            } else {
+                echo " <a class='navbar-brand' href='?'>Modist</a>";
+            }
+            ?>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="?" class="nav-link">Home</a></li>
+                    <?php if (isset($_SESSION['user'])) {
+                        if ($_SESSION['user']['role'] == '1') {
+                            echo "<li class='nav-item'><a href='?page=admin&user' class='nav-link'>Home</a></li>";
+                        } else {
+                            echo "<li class='nav-item'><a href='?' class='nav-link'>Home</a></li>";
+                        }
+                    } else {
+                        echo "<li class='nav-item'><a href='?' class='nav-link'>Home</a></li>";
+                    }
+                    ?>
                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -64,7 +82,7 @@
                             </div>
                         </li>
                     <?php } else {
-						echo "<li class='nav-item'><a href='?page=dangKi' class='nav-link'>Đăng Kí</a></li>";
+                        echo "<li class='nav-item'><a href='?page=dangKi' class='nav-link'>Đăng Kí</a></li>";
                     } ?>
                     <li class="nav-item"><a href="?page=login" class="nav-link">Đăng Nhập</a></li>
                     <li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['total'])) echo $_SESSION['total'] ?>]</a></li>
@@ -105,7 +123,7 @@
                         </div>
                     </form>
                 </div>
-                <b style="color: red ;text-align: center"><?php if(isset($_SESSION['error']))echo $_SESSION['error'] ?></b>
+                <b style="color: red ;text-align: center"><?php if (isset($_SESSION['error'])) echo $_SESSION['error'] ?></b>
                 <div class="mt-4">
                     <div class="d-flex justify-content-center links">
                         Don't have an account? <a href="?page=dangKi" class="ml-2">Sign Up</a>
