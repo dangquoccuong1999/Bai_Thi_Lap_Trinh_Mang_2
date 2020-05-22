@@ -158,7 +158,11 @@ class ProductController
                 $data = $this->productDb->login($user, $pass);
                 if (!empty($data)) {
                     $_SESSION['user'] =  $data;
-                    header('Location: index.php');
+                    if($data['role']==0){
+                        header('Location: index.php');
+                    }else{
+                        header('Location: index.php?page=admin&user');
+                    }                
                 } else {
                     if (!empty($this->productDb->checkUser($user))) {
                         $_SESSION['error'] = 'Đăng nhập sai';
@@ -281,11 +285,7 @@ class ProductController
             $email = $_POST['email'];
             $phone = $_POST['phone'];
             $address = $_POST['address'];
-            if (isset($_POST['gender'])) {
-                $sex = $_POST['gender'];
-            } else {
-                $sex = "Khác";
-            }
+            $sex = $_POST['gender'];
 
             if ($name == "") {
                 $thongBao = "Tên không được để trống !";
@@ -296,7 +296,7 @@ class ProductController
                     if ($sex == "") {
                         $thongBao = "Giới tính không được để trống !";
                     } else {
-                        if ($sex != 'nam' || $sex != 'Nam' || $sex != 'nữ' || $sex != 'Nữ') {
+                        if ($sex != 'nam' && $sex != 'Nam' && $sex != 'nữ' && $sex != 'Nữ') {
                             $sex = "Khác";
                         }
                         if ($phone == "") {

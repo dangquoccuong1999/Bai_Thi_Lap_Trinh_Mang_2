@@ -168,7 +168,7 @@ class ProductDB
         $user = $userName;
         $pass = $password;
 
-        $sql = "SELECT users.id,users.user,users.email, customer.name, customer.date_of_birth,customer.number_phone,customer.sex,customer.address FROM `users`, customer Where user ='$user' AND password = '$pass' AND users.id = customer.id_user";
+        $sql = "SELECT users.id,users.user,users.role,users.email, customer.name, customer.date_of_birth,customer.number_phone,customer.sex,customer.address FROM `users`, customer Where user ='$user' AND password = '$pass' AND users.id = customer.id_user";
         $stmt = $this->conn->query($sql);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         return $data;

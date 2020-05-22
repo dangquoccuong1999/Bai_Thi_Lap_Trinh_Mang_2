@@ -59,18 +59,14 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a href="?" class="nav-link">Home</a></li>
                         <li class="nav-item dropdown active">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="?page=shop">Shop All</a>
-                                <a class="dropdown-item" href="?page=cart">Cart</a>
-                            </div>
+                            
                         </li>
                         <?php if (isset($_SESSION['user'])) { ?>
                             <li class="nav-item dropdown active">
                                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php if (isset($_SESSION['user'])) echo  $_SESSION['user']['user'] ?></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                                     <a class="dropdown-item" href="?page=userProfile">Tài khoản của tôi</a>
-                                    <a class="dropdown-item" href="">Đăng xuất</a>
+                                    <a class="dropdown-item" href="?page=logout">Đăng xuất</a>
                                 </div>
                             </li>
                         <?php } else {

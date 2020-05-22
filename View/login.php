@@ -60,7 +60,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php if (isset($_SESSION['user'])) echo  $_SESSION['user']['user'] ?></a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
                                 <a class="dropdown-item" href="?page=userProfile">Tài khoản của tôi</a>
-                                <a class="dropdown-item" href="">Đăng xuất</a>
+                                <a class="dropdown-item" href="?page=logout">Đăng xuất</a>
                             </div>
                         </li>
                     <?php } else {
