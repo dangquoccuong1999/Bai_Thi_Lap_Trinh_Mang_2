@@ -206,7 +206,7 @@ class AdminController
             $capacity = '100ml';
             $quantity_number = $_POST['quantity_number'];
 
-            foreach($products as $product){
+            foreach ($products as $product) {
                 print_r(count($name_product));
             }
         }
@@ -352,7 +352,7 @@ class AdminController
             $thang = $_GET['thang'];
             $nam =  $_GET['nam'];
             $customers = $this->adminDB->khachHangMuaNhieuNhat($thang, $nam);
-            
+
             $now = getdate();
             $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
             $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
@@ -361,5 +361,18 @@ class AdminController
             $year =  $now["year"];
         }
         include 'View/khachHangMuaNhieuNhat.php';
+    }
+
+    public function khachHangChuaMuaSanPhamNao()
+    {
+        $customers = $this->adminDB->khachHangChuaMuaSanPhamNao();
+
+        $now = getdate();
+        $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
+        $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
+        $currentWeek = $now["wday"] . ".";
+
+        $year =  $now["year"];
+        include 'View/khachHangChuaMuaSanPhamNao.php';
     }
 }

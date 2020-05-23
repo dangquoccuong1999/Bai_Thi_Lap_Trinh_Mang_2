@@ -121,4 +121,12 @@ class AdminDB
         $customer = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $customer;
     }
+
+    public function khachHangChuaMuaSanPhamNao()
+    {       
+        $sql = "SELECT * FROM customer WHERE id Not in (SELECT DISTINCT id_customer FROM `bill`)";
+        $stmt = $this->conn->query($sql);
+        $customer = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $customer;
+    }
 }

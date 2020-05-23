@@ -91,6 +91,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thống kê người dùng</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <div id="menuchinh3">Mua nhiều nhất</div>
+                            <div id="menuchinh3"><a href="?page=khachHangChuaMuaSanPhamNao" style="color:black">Chưa mua sản phẩm nào</a></div>
 
                         </div>
                         <div class="dropdown-menu" aria-labelledby="dropdown04" id="menuan3">
@@ -130,10 +131,7 @@
 
     <br>
     <div style="margin-top:50px">
-        <h1>Danh sách sản phẩm</h1>
-        <h3><a href="?page=adminAddProduct">Thêm sản phẩm</a></h3>
-        <br>
-        <br>
+       
         <form action="?page=adminUpdateProduct" method="post">
                 <table class="table">
                     <thead>

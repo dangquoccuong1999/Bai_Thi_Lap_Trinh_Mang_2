@@ -90,6 +90,9 @@ switch ($page) {
     case 'khachHangMuaNhieuNhat':
         $adminController->khachHangMuaNhieuNhat();
         break;
+    case 'khachHangChuaMuaSanPhamNao':
+        $adminController->khachHangChuaMuaSanPhamNao();
+        break;
     default:
         $productController->index();
         break;
