@@ -91,7 +91,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thống kê người dùng</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <div id="menuchinh3">Mua nhiều nhất</div>
-                            
+
                         </div>
                         <div class="dropdown-menu" aria-labelledby="dropdown04" id="menuan3">
                             <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=1&nam=<?php echo $year ?>">Tháng 1</a>
@@ -135,34 +135,33 @@
         <br>
         <br>
         <form action="?page=adminUpdateProduct" method="post">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Id_Customer</th>
-                        <th scope="col">Tổng số lượng mua</th>
-                        <th scope="col">Tên</th>
-                        <th scope="col">Ngày sinh</th>
-                        <th scope="col">Địa chỉ</th>
-                        <th scope="col">Số điện thoại</th>
-                        <th scope="col">Giới tính</th>            
-                    </tr>
-                </thead>
-                <?php foreach ($customers as $customer) { ?>
-
-                    <tbody>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <th scope="row"><?php echo $customer['id_customer'] ?></th>
-                            <td><?php echo $customer['tong'] ?></td>
-                            <td><?php echo $customer['name'] ?></td>
-                            <td><?php echo $customer['date_of_birth'] ?></td>
-                            <td><?php echo $customer['address'] ?></td>
-                            <td><?php echo $customer['number_phone'] ?></td>
-                            <td><?php echo $customer['sex'] ?></td>
+                            <th scope="col">Id_Customer</th>
+                            <th scope="col">Tổng số lượng mua</th>
+                            <th scope="col">Tên</th>
+                            <th scope="col">Ngày sinh</th>
+                            <th scope="col">Địa chỉ</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th scope="col">Giới tính</th>
                         </tr>
-                    </tbody>
-                <?php  } ?>
-            </table>
+                    </thead>
+                    <?php foreach ($customers as $customer) { ?>
 
+                        <tbody>
+                            <tr>
+                                <th scope="row"><?php echo $customer['id_customer'] ?></th>
+                                <td><?php echo $customer['tong'] ?></td>
+                                <td><?php echo $customer['name'] ?></td>
+                                <td><?php echo $customer['date_of_birth'] ?></td>
+                                <td><?php echo $customer['address'] ?></td>
+                                <td><?php echo $customer['number_phone'] ?></td>
+                                <td><?php echo $customer['sex'] ?></td>
+                            </tr>
+                        </tbody>
+                    <?php  } ?>
+                </table>
         </form>
         <section class="ftco-section-parallax">
             <div class="parallax-img d-flex align-items-center">

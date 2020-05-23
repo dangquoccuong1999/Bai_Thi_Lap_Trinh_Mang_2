@@ -30,25 +30,70 @@ class ProductController
 
     public function shop()
     {
-        $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
-        $limit = 8;
+        if (isset($_GET['theLoai'])) {
+            if ($_GET['theLoai'] == 'nam') {
+                $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
+                $limit = 8;
 
-        //TÌM LIMIT VÀ CURRENT_PAGE
-        $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
-        $limit = 8;
+                //TÌM LIMIT VÀ CURRENT_PAGE
+                $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
+                $limit = 8;
 
-        //TÍNH TOÁN TOTAL_PAGE VÀ START
-        $total_records = $this->productDb->getTotalRecords();
+                //TÍNH TOÁN TOTAL_PAGE VÀ START
+                $total_records = $this->productDb->getTotalRecordsMan();
 
-        $total_page = ceil($total_records[0]['total'] / $limit);
-        // Giới hạn current_page trong khoảng 1 đến total_page
-        if ($current_page > $total_page) {
-            $current_page = $total_page;
-        } else if ($current_page < 1) {
-            $current_page = 1;
+                $total_page = ceil($total_records[0]['total'] / $limit);
+                // Giới hạn current_page trong khoảng 1 đến total_page
+                if ($current_page > $total_page) {
+                    $current_page = $total_page;
+                } else if ($current_page < 1) {
+                    $current_page = 1;
+                }
+                $productPagination = $this->productDb->paginationLocTheoMan($current_page, $limit);
+
+            } else if ($_GET['theLoai'] == 'nu') {
+                $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
+                $limit = 8;
+
+                //TÌM LIMIT VÀ CURRENT_PAGE
+                $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
+                $limit = 8;
+
+                //TÍNH TOÁN TOTAL_PAGE VÀ START
+                $total_records = $this->productDb->getTotalRecordsWomen();
+
+                $total_page = ceil($total_records[0]['total'] / $limit);
+                // Giới hạn current_page trong khoảng 1 đến total_page
+                if ($current_page > $total_page) {
+                    $current_page = $total_page;
+                } else if ($current_page < 1) {
+                    $current_page = 1;
+                }
+                $productPagination = $this->productDb->paginationLocTheoWomen($current_page, $limit);
+
+            }
+        } else {
+            $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
+            $limit = 8;
+
+            //TÌM LIMIT VÀ CURRENT_PAGE
+            $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
+            $limit = 8;
+
+            //TÍNH TOÁN TOTAL_PAGE VÀ START
+            $total_records = $this->productDb->getTotalRecords();
+
+            $total_page = ceil($total_records[0]['total'] / $limit);
+            // Giới hạn current_page trong khoảng 1 đến total_page
+            if ($current_page > $total_page) {
+                $current_page = $total_page;
+            } else if ($current_page < 1) {
+                $current_page = 1;
+            }
+
+            $productPagination = $this->productDb->pagination($current_page, $limit);
         }
 
-        $productPagination = $this->productDb->pagination($current_page, $limit);
         include_once 'View/shop.php';
     }
 
@@ -256,13 +301,13 @@ class ProductController
 
     public function checkOut()
     {
-        if(!empty($_SESSION['cart'])){
+        if (!empty($_SESSION['cart'])) {
             $this->productDb->checkOut();
             $thongbao = "Bạn đã mua thành công";
             unset($_SESSION['cart']);
             unset($_SESSION['total']);
             unset($_SESSION['tongTien']);
-        }  
+        }
         include 'View/cart.php';
     }
 

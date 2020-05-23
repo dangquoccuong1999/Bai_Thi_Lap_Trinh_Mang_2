@@ -17,6 +17,12 @@ class AdminController
     public function index()
     {
         $users = $this->adminDB->getAllUser();
+        $now = getdate();
+        $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
+        $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
+        $currentWeek = $now["wday"] . ".";
+
+        $year =  $now["year"];
 
         include 'View/admin.php';
     }
@@ -180,6 +186,13 @@ class AdminController
 
     public function updateProduct()
     {
+        $now = getdate();
+        $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
+        $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
+        $currentWeek = $now["wday"] . ".";
+
+        $year =  $now["year"];
+
         $products = $this->adminDB->getAllProducts();
 
         if (isset($_POST['updateProduct'])) {
@@ -338,8 +351,8 @@ class AdminController
         if (isset($_GET['thang']) && isset($_GET['nam'])) {
             $thang = $_GET['thang'];
             $nam =  $_GET['nam'];
-            $customer = $this->adminDB->khachHangMuaNhieuNhat($thang, $nam);
-
+            $customers = $this->adminDB->khachHangMuaNhieuNhat($thang, $nam);
+            
             $now = getdate();
             $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
             $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];

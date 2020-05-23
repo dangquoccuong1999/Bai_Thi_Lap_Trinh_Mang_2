@@ -160,6 +160,25 @@ class ProductDB
         $total_records = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $total_records;
     }
+
+    public function getTotalRecordsMan()
+    {
+        //TÌM TỔNG SỐ RECORDS 
+        $sql = "select count(id) as total from products WHERE products.category='man'";
+        $stmt = $this->conn->query($sql);
+        $total_records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $total_records;
+    }
+
+    public function getTotalRecordsWomen()
+    {
+        //TÌM TỔNG SỐ RECORDS 
+        $sql = "select count(id) as total from products WHERE products.category='women'";
+        $stmt = $this->conn->query($sql);
+        $total_records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $total_records;
+    }
+
     public function pagination($current_page, $limit)
     {
 
@@ -172,6 +191,29 @@ class ProductDB
         return $products;
     }
 
+    public function paginationLocTheoMan($current_page, $limit)
+    {
+
+        // Tìm Start
+        $start = ($current_page - 1) * $limit;
+        //TRUY VẤN LẤY DANH SÁCH TIN TỨC
+        $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '100ml' AND products.id = product_detail.id_product and products.category = 'man' LIMIT $start, $limit";
+        $stmt = $this->conn->query($sql);
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $products;
+    }
+
+    public function paginationLocTheoWomen($current_page, $limit)
+    {
+
+        // Tìm Start
+        $start = ($current_page - 1) * $limit;
+        //TRUY VẤN LẤY DANH SÁCH TIN TỨC
+        $sql = "SELECT DISTINCT products.id,products.name_product,products.name_producer,products.origin,products.description,products.category,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM `products`,product_detail WHERE product_detail.capacity = '100ml' AND products.id = product_detail.id_product and products.category = 'women' LIMIT $start, $limit";
+        $stmt = $this->conn->query($sql);
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $products;
+    }
     //đăng nhập
     public function login($userName, $password)
     {

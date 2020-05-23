@@ -149,7 +149,6 @@
                         <th scope="col">Price</th>
                         <th scope="col">Capacity</th>
                         <th scope="col">Quantity</th>
-                        <th scope="col">Xóa</th>
                     </tr>
                 </thead>
                 <?php foreach ($products as $product) { ?>
@@ -168,7 +167,6 @@
                             <td><?php echo $product['price'] ?></td>
                             <td><?php echo $product['capacity'] ?></td>
                             <td><?php echo $product['quantity_number'] ?></td>
-                            <td><a href="?page=adminDeleteProduct&id=<?php echo $product['id'] ?>">Delete</a></td>
                         </tr>
                     </tbody>
                 <?php  } ?>

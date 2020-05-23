@@ -23,6 +23,10 @@ switch ($page) {
         break;
     case 'shop':
         $productController->shop();
+        break;
+    case 'shop':
+        $productController->shop();
+        break;
     case 'single_product':
         $productController->singleProduct();
         break;

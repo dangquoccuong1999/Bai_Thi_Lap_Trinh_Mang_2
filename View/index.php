@@ -47,6 +47,17 @@
                             <a class="dropdown-item" href="?page=shop">Shop All</a>
                         </div>
                     </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tìm kiếm sản phẩm</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <div id="menuchinh">Thể loại</div>
+                        </div>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04" id="menuan">
+                            <a class="dropdown-item" href="?page=shop&theLoai=nam">Nam</a>
+                            <a class="dropdown-item" href="?page=shop&theLoai=nu">Nữ</a>
+                        </div>
+
+                    </li>
                     <?php if (isset($_SESSION['user'])) { ?>
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php if (isset($_SESSION['user'])) echo  $_SESSION['user']['user'] ?></a>
@@ -56,7 +67,7 @@
                             </div>
                         </li>
                     <?php } else {
-						echo "<li class='nav-item'><a href='?page=dangKi' class='nav-link'>Đăng Kí</a></li>";
+                        echo "<li class='nav-item'><a href='?page=dangKi' class='nav-link'>Đăng Kí</a></li>";
                     } ?>
                     <li class="nav-item"><a href="?page=login" class="nav-link">Đăng Nhập</a></li>
                     <li class="nav-item cta cta-colored"><a href="?page=cart" class="nav-link"><span class="icon-shopping_cart"></span>[<?php if (isset($_SESSION['total'])) echo $_SESSION['total'] ?>]</a></li>
@@ -511,6 +522,105 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="View/js/google-map.js"></script>
     <script src="View/js/main.js"></script>
+    <style>
+        #menuan {
+            display: none;
+            position: absolute;
+            top: 70px;
+            left: 150px;
+        }
 
+        #menuchinh {
+            position: relative;
+            /* font-size: 14px;
+                text-align: center; */
+        }
+
+        #menuan2 {
+            display: none;
+            position: absolute;
+            top: 100px;
+            left: 150px;
+        }
+
+        #menuchinh2 {
+            position: relative;
+            /* font-size: 14px;
+                text-align: center; */
+        }
+
+        #menuan3 {
+            display: none;
+            position: absolute;
+            top: 70px;
+            left: 140px;
+        }
+
+        #menuchinh3 {
+            position: relative;
+            /* font-size: 14px;
+                text-align: center; */
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $("#menuchinh").mouseenter(function() {
+                $("#menuan").css("display", "block");
+            });
+
+            $("#menuchinh").mouseleave(function() {
+                $("#menuan").css("display", "none");
+            });
+
+
+            $("#menuan").mouseenter(function() {
+                $("#menuan").css("display", "block");
+            });
+
+            $("#menuan").mouseleave(function() {
+                $("#menuan").css("display", "none");
+            });
+
+            //menu 2
+            $("#menuchinh2").mouseenter(function() {
+                $("#menuan2").css("display", "block");
+            });
+
+            $("#menuchinh2").mouseleave(function() {
+                $("#menuan2").css("display", "none");
+            });
+
+
+            $("#menuan2").mouseenter(function() {
+                $("#menuan2").css("display", "block");
+            });
+
+            $("#menuan2").mouseleave(function() {
+                $("#menuan2").css("display", "none");
+            });
+
+            //menu 3
+            $("#menuchinh3").mouseenter(function() {
+                $("#menuan3").css("display", "block");
+            });
+
+            $("#menuchinh3").mouseleave(function() {
+                $("#menuan3").css("display", "none");
+            });
+
+
+            $("#menuan3").mouseenter(function() {
+                $("#menuan3").css("display", "block");
+            });
+
+            $("#menuan3").mouseleave(function() {
+                $("#menuan3").css("display", "none");
+            });
+
+
+        })
+    </script>
 </body>
+
 </html>
