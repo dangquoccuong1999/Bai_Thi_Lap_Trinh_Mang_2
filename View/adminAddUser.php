@@ -236,6 +236,107 @@
     <script src="View/js/google-map.js"></script>
     <script src="View/js/main.js"></script>
 
+    
+    <style>
+            #menuan {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 150px;
+            }
+
+            #menuchinh {
+                position: relative;
+                /* font-size: 14px;
+                text-align: center; */
+            }
+
+            #menuan2 {
+                display: none;
+                position: absolute;
+                top: 100px;
+                left: 150px;
+            }
+
+            #menuchinh2 {
+                position: relative;
+                /* font-size: 14px;
+                text-align: center; */
+            }
+
+            #menuan3 {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 140px;
+            }
+
+            #menuchinh3 {
+                position: relative;
+                /* font-size: 14px;
+                text-align: center; */
+            }
+        </style>
+
+        <script>
+            $(document).ready(function() {
+                $("#menuchinh").mouseenter(function() {
+                    $("#menuan").css("display", "block");
+                });
+
+                $("#menuchinh").mouseleave(function() {
+                    $("#menuan").css("display", "none");
+                });
+
+
+                $("#menuan").mouseenter(function() {
+                    $("#menuan").css("display", "block");
+                });
+
+                $("#menuan").mouseleave(function() {
+                    $("#menuan").css("display", "none");
+                });
+
+                //menu 2
+                $("#menuchinh2").mouseenter(function() {
+                    $("#menuan2").css("display", "block");
+                });
+
+                $("#menuchinh2").mouseleave(function() {
+                    $("#menuan2").css("display", "none");
+                });
+
+
+                $("#menuan2").mouseenter(function() {
+                    $("#menuan2").css("display", "block");
+                });
+
+                $("#menuan2").mouseleave(function() {
+                    $("#menuan2").css("display", "none");
+                });
+
+                //menu 3
+                $("#menuchinh3").mouseenter(function() {
+                    $("#menuan3").css("display", "block");
+                });
+
+                $("#menuchinh3").mouseleave(function() {
+                    $("#menuan3").css("display", "none");
+                });
+
+
+                $("#menuan3").mouseenter(function() {
+                    $("#menuan3").css("display", "block");
+                });
+
+                $("#menuan3").mouseleave(function() {
+                    $("#menuan3").css("display", "none");
+                });
+
+
+            })
+        </script>
+
 </body>
 
 </html>

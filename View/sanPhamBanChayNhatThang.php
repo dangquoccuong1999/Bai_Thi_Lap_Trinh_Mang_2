@@ -127,53 +127,54 @@
         </div>
     </nav>
     <!-- END nav -->
-    <br>
-    <div style="margin-top:50px">
-        <h1>Danh sách sản phẩm</h1>
+  
         <br>
-        <br>
-        <form action="?page=addProduct" method="post">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name Product</th>
-                        <th scope="col">Name Producer</th>
-                        <th scope="col">Origin</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Img_product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Capacity</th>
-                        <th scope="col">Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input name="name_product"></td>
-                        <td><input name="name_producer"></td>
-                        <td><input style="width:80%" name="origin"></td>
-                        <td><input name="description"></td>
-                        <td><input style="width:80%" name="category"></td>
-                        <td>
-                            <input type="file" name="img_product">
-                        </td>
-                        <td><input name="price"></td>
-                        <td><input style="width:80%" name="capacity" value="100ml" disabled></td>
-                        <td><input style="width:80%" name="quantity_number"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <p align="right">
-                <input type="submit" value="Add" name="addProduct">
-            </p>
-        </form>
-        <?php if (isset($thongBao)) { ?>
-            <div class="alert alert-danger" role="alert">
-                <strong><?php echo $thongBao ?></strong>
-            </div>
-        <?php } ?>
-    </div>
+        <div style="margin-top:50px">
+            <h1>Danh sách sản phẩm</h1>
+            <h3><a href="?page=adminAddProduct">Thêm sản phẩm</a></h3>
+            <br>
+            <br>
+            <form action="?page=adminUpdateProduct" method="post">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Name Product</th>
+                            <th scope="col">Name Producer</th>
+                            <th scope="col">Origin</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Img_product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Capacity</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Xóa</th>
+                        </tr>
+                    </thead>
+                    <?php foreach ($products as $product) { ?>
 
+                        <tbody>
+                            <tr>
+                                <th scope="row"><?php echo $product['id'] ?></th>
+                                <td><?php echo $product['SL'] ?></td>
+                                <td><?php echo $product['name_product'] ?></td>
+                                <td><?php echo $product['name_producer'] ?></td>
+                                <td><?php echo $product['origin'] ?></td>
+                                <td><?php echo $product['description'] ?></td>
+                                <td><?php echo $product['category'] ?></td>
+                                <td><img src="View/<?php echo $product['img_product'] ?>" style="width:100px" name="img_product[<?php $product['id'] ?>]">          
+                                </td>
+                                <td><?php echo $product['price'] ?></td>
+                                <td><?php echo $product['capacity'] ?></td>
+                                <td><?php echo $product['quantity_number'] ?></td>
+                                <td><a href="?page=adminDeleteProduct&id=<?php echo $product['id'] ?>">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    <?php  } ?>
+                </table>
+                
+            </form>           
     <section class="ftco-section-parallax">
         <div class="parallax-img d-flex align-items-center">
             <div class="container">
@@ -390,7 +391,6 @@
 
             })
         </script>
-
 </body>
 
 </html>

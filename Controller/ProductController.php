@@ -158,11 +158,11 @@ class ProductController
                 $data = $this->productDb->login($user, $pass);
                 if (!empty($data)) {
                     $_SESSION['user'] =  $data;
-                    if($data['role']==0){
+                    if ($data['role'] == 0) {
                         header('Location: index.php');
-                    }else{
+                    } else {
                         header('Location: index.php?page=admin&user');
-                    }                
+                    }
                 } else {
                     if (!empty($this->productDb->checkUser($user))) {
                         $_SESSION['error'] = 'Đăng nhập sai';
@@ -256,11 +256,13 @@ class ProductController
 
     public function checkOut()
     {
-        $this->productDb->checkOut();
-        $thongbao = "Bạn đã mua thành công";
-        unset($_SESSION['cart']);
-        unset($_SESSION['total']);
-        unset($_SESSION['tongTien']);
+        if(!empty($_SESSION['cart'])){
+            $this->productDb->checkOut();
+            $thongbao = "Bạn đã mua thành công";
+            unset($_SESSION['cart']);
+            unset($_SESSION['total']);
+            unset($_SESSION['tongTien']);
+        }  
         include 'View/cart.php';
     }
 
@@ -302,29 +304,35 @@ class ProductController
                         if ($phone == "") {
                             $thongBao = "Số điện thoại không được để trống !";
                         } else {
-                            if ($address == "") {
-                                $thongBao = "Địa chỉ không được để trống !";
-                            } else {
-                                if ($birthday == "") {
-                                    $thongBao = "Ngày sinh không được để trống !";
+                            if (is_numeric($phone)) {
+                                if ($phone - (int) $phone != 0) {
+                                    $thongBao = "Số điện thoại không đúng định dạng !";
                                 } else {
-                                    if ($pass1 == "" || $pass2 == "") {
-                                        $thongBao = "Mật khẩu không được để trống !";
+                                    if ($address == "") {
+                                        $thongBao = "Địa chỉ không được để trống !";
                                     } else {
-                                        if ($pass1 == $pass2) {
-                                            if (strlen($pass1) >= 6) {
-                                                $checkUser = $this->productDb->checkUserTonTaiChua($user);
-                                                if (empty($checkUser)) {
-                                                    $this->productDb->singup($user, $name, $phone, $email, $address, $pass1, $sex, $birthday);
-                                                    $thongBao = "Đã đăng kí thành công !";
-                                                } else {
-                                                    $thongBao = "Tài khoản đã tồn tại";
-                                                }
-                                            } else {
-                                                $thongBao = "Mật khẩu phải có chiều dàn lớn hơn 5 kí tự";
-                                            }
+                                        if ($birthday == "") {
+                                            $thongBao = "Ngày sinh không được để trống !";
                                         } else {
-                                            $thongBao = "Mật khẩu phải trùng nhau !";
+                                            if ($pass1 == "" || $pass2 == "") {
+                                                $thongBao = "Mật khẩu không được để trống !";
+                                            } else {
+                                                if ($pass1 == $pass2) {
+                                                    if (strlen($pass1) >= 6) {
+                                                        $checkUser = $this->productDb->checkUserTonTaiChua($user);
+                                                        if (empty($checkUser)) {
+                                                            $this->productDb->singup($user, $name, $phone, $email, $address, $pass1, $sex, $birthday);
+                                                            $thongBao = "Đã đăng kí thành công !";
+                                                        } else {
+                                                            $thongBao = "Tài khoản đã tồn tại";
+                                                        }
+                                                    } else {
+                                                        $thongBao = "Mật khẩu phải có chiều dàn lớn hơn 5 kí tự";
+                                                    }
+                                                } else {
+                                                    $thongBao = "Mật khẩu phải trùng nhau !";
+                                                }
+                                            }
                                         }
                                     }
                                 }

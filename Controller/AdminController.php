@@ -23,6 +23,13 @@ class AdminController
 
     public function update()
     {
+        $now = getdate();
+        $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
+        $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
+        $currentWeek = $now["wday"] . ".";
+
+        $year =  $now["year"];
+
         $users = $this->adminDB->getAllUser();
 
         if (isset($_POST['update'])) {
@@ -41,6 +48,7 @@ class AdminController
                                     if (!empty($phone[$user['id']])) {
                                         if (is_numeric($phone[$user['id']]) && $phone[$user['id']] - (int) $phone[$user['id']] == 0) {
                                             if (!empty($address[$user['id']])) {
+                                                //cập nhật
                                                 $this->adminDB->updateUser($user['id'], $name[$user['id']], $phone[$user['id']], $email[$user['id']], $address[$user['id']], $sex[$user['id']]);
                                                 $_SESSION['thongBaoCapNhatAdmin'] = "Bạn Đã Cập Nhật Thành Công";
                                             } else {
@@ -107,31 +115,150 @@ class AdminController
                         if ($phone == "") {
                             $thongBao = "Số điện thoại không được để trống !";
                         } else {
-                            if ($address == "") {
-                                $thongBao = "Địa chỉ không được để trống !";
-                            } else {
-                                if ($birthday == "") {
-                                    $thongBao = "Ngày sinh không được để trống !";
+                            if (is_numeric($phone)) {
+                                if ($phone - (int) $phone != 0) {
+                                    $thongBao = "Số điện thoại không đúng định dạng !";
                                 } else {
-                                    if ($pass1 == "" || $pass2 == "") {
-                                        $thongBao = "Mật khẩu không được để trống !";
+                                    if ($address == "") {
+                                        $thongBao = "Địa chỉ không được để trống !";
                                     } else {
-                                        if ($pass1 == $pass2) {
-                                            if (strlen($pass1) >= 6) {
-                                                $productController = new ProductController();
-                                                $checkUser = $productController->productDb->checkUserTonTaiChua($user);
-
-                                                if (empty($checkUser)) {
-                                                    $productController->productDb->singup($user, $name, $phone, $email, $address, $pass1, $sex, $birthday);
-                                                    $thongBao = "Đã đăng kí thành công !";
-                                                } else {
-                                                    $thongBao = "Tài khoản đã tồn tại";
-                                                }
-                                            } else {
-                                                $thongBao = "Mật khẩu phải có chiều dàn lớn hơn 5 kí tự";
-                                            }
+                                        if ($birthday == "") {
+                                            $thongBao = "Ngày sinh không được để trống !";
                                         } else {
-                                            $thongBao = "Mật khẩu phải trùng nhau !";
+                                            if ($pass1 == "" || $pass2 == "") {
+                                                $thongBao = "Mật khẩu không được để trống !";
+                                            } else {
+                                                if ($pass1 == $pass2) {
+                                                    if (strlen($pass1) >= 6) {
+                                                        $productController = new ProductController();
+                                                        $checkUser = $productController->productDb->checkUserTonTaiChua($user);
+
+                                                        if (empty($checkUser)) {
+                                                            $productController->productDb->singup($user, $name, $phone, $email, $address, $pass1, $sex, $birthday);
+                                                            $thongBao = "Đã đăng kí thành công !";
+                                                        } else {
+                                                            $thongBao = "Tài khoản đã tồn tại";
+                                                        }
+                                                    } else {
+                                                        $thongBao = "Mật khẩu phải có chiều dàn lớn hơn 5 kí tự";
+                                                    }
+                                                } else {
+                                                    $thongBao = "Mật khẩu phải trùng nhau !";
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                $thongBao = "Số điện thoại nhập vào phải là số !";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        $now = getdate();
+        $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
+        $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
+        $currentWeek = $now["wday"] . ".";
+
+        $year =  $now["year"];
+        include 'View/adminAddUser.php';
+    }
+
+    public function adminProduct()
+    {
+        $products = $this->adminDB->getAllProducts();
+        $now = getdate();
+        $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
+        $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
+        $currentWeek = $now["wday"] . ".";
+
+        $year =  $now["year"];
+        include 'View/adminProduct.php';
+    }
+
+    public function updateProduct()
+    {
+        $products = $this->adminDB->getAllProducts();
+
+        if (isset($_POST['updateProduct'])) {
+            $name_product = $_POST['name_product'];
+            $name_producer = $_POST['name_producer'];
+            $origin = $_POST['origin'];
+            $description = $_POST['description'];
+            $category = $_POST['category'];
+            $img_product = $_POST['img_product'];
+            $price = $_POST['price'];
+            $capacity = '100ml';
+            $quantity_number = $_POST['quantity_number'];
+
+            foreach($products as $product){
+                print_r(count($name_product));
+            }
+        }
+        // header('Location: index.php?page=adminProduct&product');
+    }
+
+    public function adminAddProduct()
+    {
+        if (isset($_POST['addProduct'])) {
+            $name_product = $_POST['name_product'];
+            $name_producer = $_POST['name_producer'];
+            $origin = $_POST['origin'];
+            $description = $_POST['description'];
+            $category = $_POST['category'];
+            $img_product = $_POST['img_product'];
+            $price = $_POST['price'];
+            $capacity = "100ml";
+            $quantity_number = $_POST['quantity_number'];
+
+            if ($name_product == "") {
+                $thongBao = "Tên sản phẩm không được để trống !";
+            } else {
+                if ($name_producer == "") {
+                    $thongBao = "Tên nhà sản xuất không được để trống !";
+                } else {
+                    if ($origin == "") {
+                        $thongBao = "Nơi sản xuất không được để trống !";
+                    } else {
+                        if ($description == "") {
+                            $thongBao = "Mô tả không được để trống !";
+                        } else {
+                            if ($category == "") {
+                                $thongBao = "Thể loại không được để trống !";
+                            } else {
+                                if ($category != "man" && $category != "women") {
+                                    $category = "man";
+                                }
+                                if ($img_product == "") {
+                                    $thongBao = "Đường dẫn hình ảnh không được để trống";
+                                } else {
+                                    if ($price == "") {
+                                        $thongBao = "Giá tiền không được để trống";
+                                    } else {
+                                        if (!is_numeric($price)) {
+                                            $thongBao = "Giá tiền không đúng định dạng";
+                                        }
+                                        if ($capacity == "") {
+                                            $thongBao = "Dung tích không được để trống";
+                                        } else {
+                                            if ($quantity_number == "") {
+                                                $thongBao = "Số lượng không được để trống";
+                                            } else {
+                                                if (!is_numeric($quantity_number)) {
+                                                    $thongBao = "Số lượng không đúng định dạng";
+                                                } else {
+                                                    if ($quantity_number - (int) $quantity_number != 0) {
+                                                        $thongBao = "Số lượng không đúng định dạng";
+                                                    } else {
+                                                        $img_product = "images/" . $img_product;
+
+                                                        $this->adminDB->adminAddProduct($name_product, $name_producer, $origin, $description, $category, $img_product, $price, $capacity, $quantity_number);
+                                                        $thongBao = "Thêm sản phẩm thành công";
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -141,14 +268,85 @@ class AdminController
                 }
             }
         }
-        include 'View/adminAddUser.php';
-    }
+        $now = getdate();
+        $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
+        $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
+        $currentWeek = $now["wday"] . ".";
 
-    public function adminProduct()
-    {
-        $products = $this->adminDB->getAllProducts();
+        $year =  $now["year"];
         include 'View/adminAddProduct.php';
     }
 
+    public function deleteProduct()
+    {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $this->adminDB->deleteProduct($id);
+            header('Location: index.php?page=adminProduct&product');
+        }
+    }
 
+    public function sanPhamBanChayNhatThang()
+    {
+        if (isset($_GET['thang']) && isset($_GET['nam'])) {
+            $thang = $_GET['thang'];
+            $nam =  $_GET['nam'];
+            $products = $this->adminDB->sanPhamBanChayNhatThang($thang, $nam);
+
+            $now = getdate();
+            $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
+            $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
+            $currentWeek = $now["wday"] . ".";
+
+            $year =  $now["year"];
+        }
+        include 'View/sanPhamBanChayNhatThang.php';
+    }
+
+
+    public function sanPhamDoanhThuCaoNhatThang()
+    {
+        if (isset($_GET['thang']) && isset($_GET['nam'])) {
+            $thang = $_GET['thang'];
+            $nam =  $_GET['nam'];
+            $products = $this->adminDB->sanPhamDoanhThuCaoNhatThang($thang, $nam);
+
+            $now = getdate();
+            $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
+            $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
+            $currentWeek = $now["wday"] . ".";
+
+            $year =  $now["year"];
+        }
+        include 'View/sanPhamDoanhThuCaoNhatThang.php';
+    }
+
+    public function sanPhamMoi()
+    {
+        $products = $this->adminDB->sanPhamMoi();
+        $now = getdate();
+        $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
+        $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
+        $currentWeek = $now["wday"] . ".";
+
+        $year =  $now["year"];
+        include 'View/sanPhamMoi.php';
+    }
+
+    public function khachHangMuaNhieuNhat()
+    {
+        if (isset($_GET['thang']) && isset($_GET['nam'])) {
+            $thang = $_GET['thang'];
+            $nam =  $_GET['nam'];
+            $customer = $this->adminDB->khachHangMuaNhieuNhat($thang, $nam);
+
+            $now = getdate();
+            $currentTime = $now["hours"] . ":" . $now["minutes"] . ":" . $now["seconds"];
+            $currentDate = $now["mday"] . "." . $now["mon"] . "." . $now["year"];
+            $currentWeek = $now["wday"] . ".";
+
+            $year =  $now["year"];
+        }
+        include 'View/khachHangMuaNhieuNhat.php';
+    }
 }

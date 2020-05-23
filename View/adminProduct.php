@@ -127,53 +127,62 @@
         </div>
     </nav>
     <!-- END nav -->
-    <br>
-    <div style="margin-top:50px">
-        <h1>Danh sách sản phẩm</h1>
+    <?php if (isset($_GET['product'])) { ?>
         <br>
-        <br>
-        <form action="?page=addProduct" method="post">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name Product</th>
-                        <th scope="col">Name Producer</th>
-                        <th scope="col">Origin</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Img_product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Capacity</th>
-                        <th scope="col">Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input name="name_product"></td>
-                        <td><input name="name_producer"></td>
-                        <td><input style="width:80%" name="origin"></td>
-                        <td><input name="description"></td>
-                        <td><input style="width:80%" name="category"></td>
-                        <td>
-                            <input type="file" name="img_product">
-                        </td>
-                        <td><input name="price"></td>
-                        <td><input style="width:80%" name="capacity" value="100ml" disabled></td>
-                        <td><input style="width:80%" name="quantity_number"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <p align="right">
-                <input type="submit" value="Add" name="addProduct">
-            </p>
-        </form>
-        <?php if (isset($thongBao)) { ?>
-            <div class="alert alert-danger" role="alert">
-                <strong><?php echo $thongBao ?></strong>
-            </div>
-        <?php } ?>
-    </div>
+        <div style="margin-top:50px">
+            <h1>Danh sách sản phẩm</h1>
+            <h3><a href="?page=adminAddProduct">Thêm sản phẩm</a></h3>
+            <br>
+            <br>
+            <form action="?page=adminUpdateProduct" method="post">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Name Product</th>
+                            <th scope="col">Name Producer</th>
+                            <th scope="col">Origin</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Img_product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Capacity</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Xóa</th>
+                        </tr>
+                    </thead>
+                    <?php foreach ($products as $product) { ?>
 
+                        <tbody>
+                            <tr>
+                                <th scope="row"><?php echo $product['id'] ?></th>
+                                <td><input value="<?php echo $product['name_product'] ?>" name="name_product[<?php $product['id'] ?>]"></td>
+                                <td><input value="<?php echo $product['name_producer'] ?>" name="name_producer[<?php $product['id'] ?>]"></td>
+                                <td><input value="<?php echo $product['origin'] ?>" style="width:50%" name="origin[<?php $product['id'] ?>]"></td>
+                                <td><input value="<?php echo $product['description'] ?>" name="description[<?php $product['id'] ?>]"></td>
+                                <td><input value="<?php echo $product['category'] ?>" style="width:50%" name="category[<?php $product['id'] ?>]"></td>
+                                <td><img src="View/<?php echo $product['img_product'] ?>" style="width:100px" name="img_product[<?php $product['id'] ?>]">
+                                    <input type="file" name="img_product[<?php $product['id'] ?>]">
+                                </td>
+                                <td><input value="<?php echo $product['price'] ?>" name="price[<?php $product['id'] ?>]"></td>
+                                <td><input value="<?php echo $product['capacity'] ?>" style="width:50%" name="capacity[<?php $product['id'] ?>]" disabled></td>
+                                <td><input value="<?php echo $product['quantity_number'] ?>" style="width:50%" name="quantity_number[<?php $product['id'] ?>]"></td>
+                                <td><a href="?page=adminDeleteProduct&id=<?php echo $product['id'] ?>">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    <?php  } ?>
+                </table>
+                <p align="right">
+                    <input type="submit" value="Update" name="updateProduct">
+                </p>
+            </form>
+            <?php if (isset($_SESSION['thongBaoUpdateSp'])) { ?>
+                <div class="alert alert-danger" role="alert">
+                    <strong><?php echo $_SESSION['thongBaoUpdateSp']?> !</strong>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
     <section class="ftco-section-parallax">
         <div class="parallax-img d-flex align-items-center">
             <div class="container">
@@ -290,6 +299,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="View/js/google-map.js"></script>
     <script src="View/js/main.js"></script>
+
     
     <style>
             #menuan {
@@ -390,7 +400,6 @@
 
             })
         </script>
-
 </body>
 
 </html>

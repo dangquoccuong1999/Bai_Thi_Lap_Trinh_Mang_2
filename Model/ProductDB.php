@@ -61,20 +61,30 @@ class ProductDB
     public function checkOut()
     {
         //  lấy thời gian hiện tại của hệ thống
-        $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
+        // $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
 
-        $dayHienTai = $date->format('d-m-Y H:i:s');
+        // $dayHienTai = $date->format('d-m-Y H:i:s');
+
+        $dayHienTai = time();
+
         $id = $_SESSION['user']['id'];
         $tongTien = $_SESSION['tongTien'];
-        $sql = "INSERT INTO bill (id_customer,date,total_money) 
-                VALUES ('$id','$dayHienTai','$tongTien')";
+        
+        $sql = "SELECT id FROM `customer` where id_user ='$id'";
         $stmt = $this->conn->query($sql);
-
+        $id_cusstomer = $stmt->fetch(PDO::FETCH_ASSOC);
+        $id_cusstomer =  $id_cusstomer['id'];
+  
+        $sql = "INSERT INTO bill (id_customer,date,total_money) 
+                VALUES ('$id_cusstomer','$dayHienTai','$tongTien')";
+        $stmt = $this->conn->query($sql);
+       
         $sql = "SELECT MAX(id) AS id  FROM `bill`";
         $stmt = $this->conn->query($sql);
         $id_bill = $stmt->fetch(PDO::FETCH_ASSOC);
         $id_bill = $id_bill['id'];
         $capacity = "100ml";
+
         foreach ($_SESSION['cart'] as $product) {
             $id_product = $product['id'];
             $qty = $product['qty'];

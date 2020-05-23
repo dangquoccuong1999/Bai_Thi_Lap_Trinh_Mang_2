@@ -31,7 +31,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light ftco-navbar-light-2" id="ftco-navbar">
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light ftco-navbar-light-2" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="?page=admin&user">Modist</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,11 +42,73 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="?page=admin&user" class="nav-link">Home</a></li>
                     <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Shop
+                        </a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="?page=admin&user">List user</a>
                             <a class="dropdown-item" href="?page=adminProduct&product">Add Product</a>
                         </div>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thống kê sản phẩm</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <div id="menuchinh">Doanh thu cao nhất</div>
+                            <div id="menuchinh2">Bán chạy nhất</div>
+                            <div id="menuchinh2"><a href="?page=sanPhamMoi" style="color:black">Sản phẩm mới</a></div>
+                        </div>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04" id="menuan">
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=1&nam=<?php echo $year ?>">Tháng 1</a>
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=2&nam=<?php echo $year ?>">Tháng 2</a>
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=3&nam=<?php echo $year ?>">Tháng 3</a>
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=4&nam=<?php echo $year ?>">Tháng 4</a>
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=5&nam=<?php echo $year ?>">Tháng 5</a>
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=6&nam=<?php echo $year ?>">Tháng 6</a>
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=7&nam=<?php echo $year ?>">Tháng 7</a>
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=8&nam=<?php echo $year ?>">Tháng 8</a>
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=9&nam=<?php echo $year ?>">Tháng 9</a>
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=10&nam=<?php echo $year ?>">Tháng 10</a>
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=11&nam=<?php echo $year ?>">Tháng 11</a>
+                            <a class="dropdown-item" href="?page=sanPhamDoanhThuCaoNhatThang&thang=12&nam=<?php echo $year ?>">Tháng 12</a>
+                        </div>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdown04" id="menuan2">
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=1&nam=<?php echo $year ?>">Tháng 1</a>
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=2&nam=<?php echo $year ?>">Tháng 2</a>
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=3&nam=<?php echo $year ?>">Tháng 3</a>
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=4&nam=<?php echo $year ?>">Tháng 4</a>
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=5&nam=<?php echo $year ?>">Tháng 5</a>
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=6&nam=<?php echo $year ?>">Tháng 6</a>
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=7&nam=<?php echo $year ?>">Tháng 7</a>
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=8&nam=<?php echo $year ?>">Tháng 8</a>
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=9&nam=<?php echo $year ?>">Tháng 9</a>
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=10&nam=<?php echo $year ?>">Tháng 10</a>
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=11&nam=<?php echo $year ?>">Tháng 11</a>
+                            <a class="dropdown-item" href="?page=sanPhamBanChayThang&thang=12&nam=<?php echo $year ?>">Tháng 12</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thống kê người dùng</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <div id="menuchinh3">Mua nhiều nhất</div>
+                            
+                        </div>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04" id="menuan3">
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=1&nam=<?php echo $year ?>">Tháng 1</a>
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=2&nam=<?php echo $year ?>">Tháng 2</a>
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=3&nam=<?php echo $year ?>">Tháng 3</a>
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=4&nam=<?php echo $year ?>">Tháng 4</a>
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=5&nam=<?php echo $year ?>">Tháng 5</a>
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=6&nam=<?php echo $year ?>">Tháng 6</a>
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=7&nam=<?php echo $year ?>">Tháng 7</a>
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=8&nam=<?php echo $year ?>">Tháng 8</a>
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=9&nam=<?php echo $year ?>">Tháng 9</a>
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=10&nam=<?php echo $year ?>">Tháng 10</a>
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=11&nam=<?php echo $year ?>">Tháng 11</a>
+                            <a class="dropdown-item" href="?page=khachHangMuaNhieuNhat&thang=12&nam=<?php echo $year ?>">Tháng 12</a>
+                        </div>
+
+
                     </li>
                     <?php if (isset($_SESSION['user'])) { ?>
                         <li class="nav-item dropdown active">
@@ -112,11 +174,11 @@
                     <input type="submit" value="Update" name="update">
                 </p>
             </form>
-           <?php if (isset($_SESSION['thongBaoCapNhatAdmin'])) { ?>
+            <?php if (isset($_SESSION['thongBaoCapNhatAdmin'])) { ?>
                 <div class="alert alert-danger" role="alert">
                     <strong><?php echo $_SESSION['thongBaoCapNhatAdmin'] ?> !</strong>
                 </div>
-            <?php } ?> 
+            <?php } ?>
         </div>
     <?php } ?>
     <section class="ftco-section-parallax">
@@ -235,6 +297,106 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="View/js/google-map.js"></script>
     <script src="View/js/main.js"></script>
+    
+    <style>
+            #menuan {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 150px;
+            }
+
+            #menuchinh {
+                position: relative;
+                /* font-size: 14px;
+                text-align: center; */
+            }
+
+            #menuan2 {
+                display: none;
+                position: absolute;
+                top: 100px;
+                left: 150px;
+            }
+
+            #menuchinh2 {
+                position: relative;
+                /* font-size: 14px;
+                text-align: center; */
+            }
+
+            #menuan3 {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 140px;
+            }
+
+            #menuchinh3 {
+                position: relative;
+                /* font-size: 14px;
+                text-align: center; */
+            }
+        </style>
+
+        <script>
+            $(document).ready(function() {
+                $("#menuchinh").mouseenter(function() {
+                    $("#menuan").css("display", "block");
+                });
+
+                $("#menuchinh").mouseleave(function() {
+                    $("#menuan").css("display", "none");
+                });
+
+
+                $("#menuan").mouseenter(function() {
+                    $("#menuan").css("display", "block");
+                });
+
+                $("#menuan").mouseleave(function() {
+                    $("#menuan").css("display", "none");
+                });
+
+                //menu 2
+                $("#menuchinh2").mouseenter(function() {
+                    $("#menuan2").css("display", "block");
+                });
+
+                $("#menuchinh2").mouseleave(function() {
+                    $("#menuan2").css("display", "none");
+                });
+
+
+                $("#menuan2").mouseenter(function() {
+                    $("#menuan2").css("display", "block");
+                });
+
+                $("#menuan2").mouseleave(function() {
+                    $("#menuan2").css("display", "none");
+                });
+
+                //menu 3
+                $("#menuchinh3").mouseenter(function() {
+                    $("#menuan3").css("display", "block");
+                });
+
+                $("#menuchinh3").mouseleave(function() {
+                    $("#menuan3").css("display", "none");
+                });
+
+
+                $("#menuan3").mouseenter(function() {
+                    $("#menuan3").css("display", "block");
+                });
+
+                $("#menuan3").mouseleave(function() {
+                    $("#menuan3").css("display", "none");
+                });
+
+
+            })
+        </script>
 
 </body>
 

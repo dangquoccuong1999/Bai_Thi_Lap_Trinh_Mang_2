@@ -59,6 +59,33 @@ switch ($page) {
     case 'adminProduct':
         $adminController->adminProduct();
         break;
+    case 'adminUpdateProduct':
+        $adminController->updateProduct();
+        break;
+    case 'adminUpdateProduct':
+        $adminController->updateProduct();
+        break;
+    case 'adminAddProduct':
+        $adminController->adminAddProduct();
+        break;
+    case 'addProduct':
+        $adminController->adminAddProduct();
+        break;
+    case 'adminDeleteProduct':
+        $adminController->deleteProduct();
+        break;
+    case 'sanPhamBanChayThang':
+        $adminController->sanPhamBanChayNhatThang();
+        break;
+    case 'sanPhamDoanhThuCaoNhatThang':
+        $adminController->sanPhamDoanhThuCaoNhatThang();
+        break;
+    case 'sanPhamMoi':
+        $adminController->sanPhamMoi();
+        break;
+    case 'khachHangMuaNhieuNhat':
+        $adminController->khachHangMuaNhieuNhat();
+        break;
     default:
         $productController->index();
         break;
