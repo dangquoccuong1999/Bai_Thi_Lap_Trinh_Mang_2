@@ -152,26 +152,26 @@
                             <th scope="col">Xóa</th>
                         </tr>
                     </thead>
-                    <?php foreach ($products as $product) { ?>
-
+                    <?php $i =1; foreach ($products as $product) {?>
+                        
                         <tbody>
                             <tr>
                                 <th scope="row"><?php echo $product['id'] ?></th>
-                                <td><input value="<?php echo $product['name_product'] ?>" name="name_product[<?php $product['id'] ?>]"></td>
-                                <td><input value="<?php echo $product['name_producer'] ?>" name="name_producer[<?php $product['id'] ?>]"></td>
-                                <td><input value="<?php echo $product['origin'] ?>" style="width:50%" name="origin[<?php $product['id'] ?>]"></td>
-                                <td><input value="<?php echo $product['description'] ?>" name="description[<?php $product['id'] ?>]"></td>
-                                <td><input value="<?php echo $product['category'] ?>" style="width:50%" name="category[<?php $product['id'] ?>]"></td>
-                                <td><img src="View/<?php echo $product['img_product'] ?>" style="width:100px" name="img_product[<?php $product['id'] ?>]">
-                                    <input type="file" name="img_product[<?php $product['id'] ?>]">
+                                <td><input value="<?php echo $product['name_product'] ?>" name="name_product[<?php echo $i ?>]"></td>
+                                <td><input value="<?php echo $product['name_producer'] ?>" name="name_producer[<?php echo $i ?>]"></td>
+                                <td><input value="<?php echo $product['origin'] ?>" style="width:50%" name="origin[<?php echo $i ?>]"></td>
+                                <td><input value="<?php echo $product['description'] ?>" name="description[<?php echo $i ?>]"></td>
+                                <td><input value="<?php echo $product['category'] ?>" style="width:50%" name="category[<?php echo $i ?>]"></td>
+                                <td><img src="View/<?php echo $product['img_product'] ?>" style="width:100px" name="img_product[<?php echo $i ?>]">
+                                    <input type="file" name="img_product[<?php echo $i ?>]">
                                 </td>
-                                <td><input value="<?php echo $product['price'] ?>" name="price[<?php $product['id'] ?>]"></td>
-                                <td><input value="<?php echo $product['capacity'] ?>" style="width:50%" name="capacity[<?php $product['id'] ?>]" disabled></td>
-                                <td><input value="<?php echo $product['quantity_number'] ?>" style="width:50%" name="quantity_number[<?php $product['id'] ?>]"></td>
+                                <td><input value="<?php echo $product['price'] ?>" name="price[<?php echo $i ?>]"></td>
+                                <td><input value="<?php echo $product['capacity'] ?>" style="width:50%" name="capacity[<?php echo $i ?>]" disabled></td>
+                                <td><input value="<?php echo $product['quantity_number'] ?>" style="width:50%" name="quantity_number[<?php echo $i ?>]"></td>
                                 <td><a href="?page=adminDeleteProduct&id=<?php echo $product['id'] ?>">Delete</a></td>
                             </tr>
                         </tbody>
-                    <?php  } ?>
+                    <?php $i++; } ?>
                 </table>
                 <p align="right">
                     <input type="submit" value="Update" name="updateProduct">

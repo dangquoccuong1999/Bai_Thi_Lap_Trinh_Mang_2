@@ -203,11 +203,76 @@ class AdminController
             $category = $_POST['category'];
             $img_product = $_POST['img_product'];
             $price = $_POST['price'];
+            $id = $_POST['id'];
             $capacity = '100ml';
             $quantity_number = $_POST['quantity_number'];
+            var_dump($id);
+            for ($i = 1; $i <= count($products); $i++) {
+                
+                if ($name_product[$i] == "") {
+                    $_SESSION['thongBaoUpdateSp'] = "Tên sản phẩm không được để trống";
+                } else {
+                    if ($name_producer[$i] == "") {
+                        $_SESSION['thongBaoUpdateSp'] = "Tên nhà sản xuất không được để trống";
+                    } else {
+                        if ($origin[$i] == "") {
+                            $_SESSION['thongBaoUpdateSp'] = "Nơi nhà sản xuất không được để trống";
+                        } else {
+                            if ($description[$i] == "") {
+                                $_SESSION['thongBaoUpdateSp'] = "Mô tả không được để trống";
+                            } else {
+                                if ($category[$i] == "") {
+                                    $_SESSION['thongBaoUpdateSp'] = "Thể loại không được để trống";
+                                } else {
+                                    if ($category[$i]  != "man" && $category[$i]  != "women") {
+                                        $category[$i] == "khác";
+                                    }
+                                    if ($img_product[$i] == "") {
 
-            foreach ($products as $product) {
-                print_r(count($name_product));
+                                        $img_product[$i] = $products[$i - 1]['id'];
+                                        if ($price[$i] == "") {
+                                            $_SESSION['thongBaoUpdateSp'] = "Giá tiền không được để trống";
+                                        } else {
+                                            if (!is_numeric($price[$i])) {
+                                                $_SESSION['thongBaoUpdateSp'] = "Giá tiền không đúng định dạng";
+                                            } else {
+                                                if ($quantity_number[$i] == "") {
+                                                    $_SESSION['thongBaoUpdateSp'] = "Số lượng không được để trống";
+                                                } else {
+                                                    if ($quantity_number[$i] - (int) $quantity_number[$i] != 0) {
+                                                        $_SESSION['thongBaoUpdateSp'] = "Số lượng không đúng định dạng";
+                                                    } else {
+                                                        
+                                                        // $this->adminDB->updateProduct($id[$i], $name_product[$i], $name_producer[$i], $origin[$i], $description[$i], $category[$i], $img_product[$i], $price[$i], $capacity[$i], $quantity_number[$i]);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        if ($price[$i] == "") {
+                                            $_SESSION['thongBaoUpdateSp'] = "Giá tiền không được để trống";
+                                        } else {
+                                            if (!is_numeric($price[$i])) {
+                                                $_SESSION['thongBaoUpdateSp'] = "Giá tiền không đúng định dạng";
+                                            } else {
+                                                if ($quantity_number[$i] == "") {
+                                                    $_SESSION['thongBaoUpdateSp'] = "Số lượng không được để trống";
+                                                } else {
+                                                    if ($quantity_number[$i] - (int) $quantity_number[$i] != 0) {
+                                                        $_SESSION['thongBaoUpdateSp'] = "Số lượng không đúng định dạng";
+                                                    } else {
+
+                                                        // $this->adminDB->updateProduct($id[$i], $name_product[$i], $name_producer[$i], $origin[$i], $description[$i], $category[$i], $img_product[$i], $price[$i], $capacity[$i], $quantity_number[$i]);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         // header('Location: index.php?page=adminProduct&product');

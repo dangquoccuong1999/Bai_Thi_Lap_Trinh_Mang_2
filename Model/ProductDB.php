@@ -69,16 +69,16 @@ class ProductDB
 
         $id = $_SESSION['user']['id'];
         $tongTien = $_SESSION['tongTien'];
-        
+
         $sql = "SELECT id FROM `customer` where id_user ='$id'";
         $stmt = $this->conn->query($sql);
         $id_cusstomer = $stmt->fetch(PDO::FETCH_ASSOC);
         $id_cusstomer =  $id_cusstomer['id'];
-  
+
         $sql = "INSERT INTO bill (id_customer,date,total_money) 
                 VALUES ('$id_cusstomer','$dayHienTai','$tongTien')";
         $stmt = $this->conn->query($sql);
-       
+
         $sql = "SELECT MAX(id) AS id  FROM `bill`";
         $stmt = $this->conn->query($sql);
         $id_bill = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -253,6 +253,12 @@ class ProductDB
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         return $data;
     }
+    public function inserDangNhapHeThong($id)
+    {
+        $sql = "INSERT INTO users (check_login)
+            VALUES ('1') where id = $id";
+        $stmt = $this->conn->query($sql);
+    }
 
     public function singup($user, $name, $phone, $email, $address, $pass1, $sex, $birthday)
     {
@@ -269,5 +275,4 @@ class ProductDB
         VALUES ('$id_user','$name','$birthday','$address','$phone','$sex');";
         $stmt = $this->conn->query($sql);
     }
-
 }

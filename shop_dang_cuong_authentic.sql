@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 23, 2020 lúc 03:35 PM
+-- Thời gian đã tạo: Th5 23, 2020 lúc 06:45 PM
 -- Phiên bản máy phục vụ: 10.4.6-MariaDB
 -- Phiên bản PHP: 7.3.8
 
@@ -40,7 +40,8 @@ CREATE TABLE `bill` (
 --
 
 INSERT INTO `bill` (`id`, `id_customer`, `date`, `total_money`) VALUES
-(34, 11, '1590224039', 89000000);
+(34, 11, '1590224039', 89000000),
+(35, 16, '1590247547', 50000000);
 
 -- --------------------------------------------------------
 
@@ -64,7 +65,8 @@ INSERT INTO `bill_details` (`id`, `id_bill`, `id_product`, `quantity_number`, `c
 (43, 34, 1, 10, '100ml'),
 (44, 34, 2, 5, '100ml'),
 (45, 34, 3, 1, '100ml'),
-(46, 34, 7, 4, '100ml');
+(46, 34, 7, 4, '100ml'),
+(47, 35, 3, 10, '100ml');
 
 -- --------------------------------------------------------
 
@@ -90,7 +92,7 @@ INSERT INTO `customer` (`id`, `id_user`, `name`, `date_of_birth`, `address`, `nu
 (2, 2, 'Phạm Nhật Namm', '2020-05-22', 'Hà Nội', '0379164525', 'Nam'),
 (8, 9, 'Đặng Quốc Cường', '2020-05-22', 'Nhà Cương Khánh, chợ Giường Duyên Thái Thường Tín Hà Nội', '0379197756', 'Khác'),
 (11, 12, 'Lỗ Trong  Ban', '2020-05-23', 'Hà Nội', '0379197756', 'Khác'),
-(16, 17, 'Lỗ Trọng Ban', '2020-05-30', 'Ha Noi', '0379197756', 'Nam');
+(16, 17, 'Lỗ Trọng Ban', '2020-05-30', 'Hà Nội', '0379197755', 'Nam');
 
 -- --------------------------------------------------------
 
@@ -191,7 +193,7 @@ INSERT INTO `products` (`id`, `name_product`, `name_producer`, `origin`, `descri
 (2, 'K by Dolce & Gabbana', 'Dolce & Gabbana', 'Ý', 'Từ hình ảnh người đàn ông làm chủ sự nghiệp và là điểm tựa của gia đình, Nước hoa nam K by Dolce & Gabbana mở ra một kỉ nguyên mới về chuẩn mực nam tính.', 'man', 'images/product-2.jpg', '1590224039', '2020-04-10 17:05:53'),
 (3, 'Yves Saint Laurent Libre Eau De Parfum ', 'Yves Saint Laurent', 'Pháp', 'Yves Saint Laurent Libre Eau De Parfum là hương thơm đại diện của tự do trong thời đại mới. Một loại nước hoa tuyên ngôn cho chính bản thân người dùng.', 'women', 'images/product-3.jpg', '1590224039', '2020-04-10 17:05:53'),
 (4, 'Dior J\'adore Eau de Parfum ', 'Dior', 'Mỹ', 'Dior J\'adore Eau de Parfum khiến phái đẹp mang nét đẹp xuất chúng, nữ tính vô hạn đến từ sự lan tỏa mùi hương.', 'man', 'images/product-5.jpg', '1590224039', '2020-04-10 17:05:53'),
-(5, 'Versace Man Eau Fraiche', 'Versace', 'Ý', 'Nước hoa nam Versace Man Eau Fraiche được thiết kế tinh tế với thủy tinh màu xanh trong suốt, thân chai có hình răng cưa độc đáo làm người dùng có thể dễ dàng cầm giữ. Với thiết kế thú vị này, sản phẩm đem đến sự cá tính và mạnh mẽ hơn cho phái mạnh.', 'man', 'images/product-4.jpg', '1590224039', '2020-04-10 17:05:53'),
+(5, 'Jimmy Choo Man Blue', 'JIMMY CHOO', 'Mỹ', 'Jimmy Choo Man Blue dành riêng cho những bạn trẻ năng động và tìm kiếm sự khác biệt: vừa hiện đại, trẻ trung nhưng vẫn vô cùng thanh lịch và sang trọng.', 'man', '1', '1590224039', '2020-04-10 17:05:53'),
 (6, 'Giorgio Armani Acqua di Gioia', 'Giorgio', 'Mỹ', 'Giorgio Armani Acqua di Gioia là phiên bản của hương thơm được bán chạy nhất trên thị trường trong thời gian qua. Trong tiếng Ý, nghĩa của từ Gioia là niềm vui và viên ngọc.', 'man', 'images/product-6.jpg', '1590224039', '2020-04-10 17:05:53'),
 (7, 'Montblanc Lady Emblem / Mont Blanc EDP Spray', 'Montblanc', 'Anh', 'Montblanc Lady Emblem / Mont Blanc EDP Spray là ph...', 'women', 'images/product-7.jpg', '1590224039', '2020-04-10 17:05:53'),
 (8, 'Ralph Lauren Romance ', 'Yves Saint Laurent', 'Pháp', 'Ralph Lauren Romance là một sản phẩm rất lãng mạn, dành riêng cho người con gái đang yêu.', 'man', 'images/product-8.jpg', '1590224039', '2020-04-10 17:05:53'),
@@ -226,9 +228,9 @@ CREATE TABLE `product_detail` (
 INSERT INTO `product_detail` (`id`, `price`, `capacity`, `quantity_number`, `id_product`, `created_at`, `updated_at`) VALUES
 (1, '4000000', '100ml', '977', 1, NULL, NULL),
 (2, '4000000', '100ml', '983', 2, NULL, NULL),
-(3, '5000000', '100ml', '996', 3, NULL, NULL),
+(3, '5000000', '100ml', '986', 3, NULL, NULL),
 (4, '4000000', '100ml', '989', 4, NULL, NULL),
-(5, '2000000', '100ml', '985', 5, NULL, NULL),
+(5, '4000000', '0', '977', 5, NULL, NULL),
 (6, '6000000', '100ml', '990', 6, NULL, NULL),
 (7, '6000000', '100ml', '996', 7, NULL, NULL),
 (8, '3000000', '100ml', '1000', 8, NULL, NULL),
@@ -400,13 +402,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `bill_details`
 --
 ALTER TABLE `bill_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT cho bảng `customer`

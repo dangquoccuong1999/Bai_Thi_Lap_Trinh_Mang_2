@@ -50,7 +50,6 @@ class ProductController
                     $current_page = 1;
                 }
                 $productPagination = $this->productDb->paginationLocTheoMan($current_page, $limit);
-
             } else if ($_GET['theLoai'] == 'nu') {
                 $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
                 $limit = 8;
@@ -70,7 +69,6 @@ class ProductController
                     $current_page = 1;
                 }
                 $productPagination = $this->productDb->paginationLocTheoWomen($current_page, $limit);
-
             }
         } else {
             $current_page = isset($_GET['trang']) ? $_GET['trang'] : 1;
