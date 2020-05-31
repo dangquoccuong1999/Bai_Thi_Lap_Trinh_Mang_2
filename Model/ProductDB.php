@@ -109,12 +109,12 @@ class ProductDB
     {
         // lấy ra các dữ liệu sản phẩm khác 
         $id = $_GET['id'];
-        $sql = "SELECT * FROM `recommend_products` WHERE id != $id";
+        $sql = "SELECT * FROM `recommend_products` WHERE id_product != $id";
         $stmt = $this->conn->query($sql);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // lấy ra các dữ liệu sản phẩm hiện tại
-        $sql = "SELECT * FROM `recommend_products` WHERE id = $id";
+        $sql = "SELECT * FROM `recommend_products` WHERE id_product = $id";
         $stmt = $this->conn->query($sql);
         $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -123,16 +123,15 @@ class ProductDB
         $arrKetQua = [];
         // tính tử số
         foreach ($result as $value) {
-            $tuSo = ($product['JIMMY CHOO'] * $value['JIMMY CHOO']) + ($product['Dolce & Gabbana'] * $value['Dolce & Gabbana']) + ($product['Yves Saint Laurent'] * $value['Yves Saint Laurent']) + ($product['Dior'] * $value['Dior']) + ($product['Versace'] * $value['Versace']) + ($product['Giorgio'] * $value['Giorgio']) + ($product['Montblanc'] * $value['Montblanc']) + ($product['Valentino'] * $value['Valentino']) + ($product['Jo Malone'] * $value['Jo Malone']) + ($product['CHANEL'] * $value['CHANEL']) + ($product['origin_My'] * $value['origin_My']) + ($product['origin_Y'] * $value['origin_Y']) + ($product['origin_Phap'] * $value['origin_Phap']) + ($product['origin_Anh'] * $value['origin_Anh']) + ($product['category_man'] * $value['category_man']) + ($product['category_women'] * $value['category_women']) + ($product['rating'] * (1 / 10) * $value['rating'] * (1 / 10));
-            array_push($arrTuSo, [$tuSo, $value['id']]);
+            $tuSo = ($product['JIMMY CHOO'] * $value['JIMMY CHOO'] * 2) + ($product['Dolce & Gabbana'] * $value['Dolce & Gabbana'] * 2) + ($product['Yves Saint Laurent'] * $value['Yves Saint Laurent']*2) + ($product['Dior'] * $value['Dior']*2) + ($product['Versace'] * $value['Versace']*2) + ($product['Giorgio'] * $value['Giorgio']*2) + ($product['Montblanc'] * $value['Montblanc']*2) + ($product['Valentino'] * $value['Valentino']*2) + ($product['Jo Malone'] * $value['Jo Malone']*2) + ($product['CHANEL'] * $value['CHANEL']*2) + ($product['origin_My'] * $value['origin_My']) + ($product['origin_Y'] * $value['origin_Y']) + ($product['origin_Phap'] * $value['origin_Phap']) + ($product['origin_Anh'] * $value['origin_Anh']) + ($product['category_man'] * $value['category_man']) + ($product['category_women'] * $value['category_women']) + ($product['rating'] * (1 / 10) * $value['rating'] * (1 / 10));
+            array_push($arrTuSo, [$tuSo, $value['id_product']]);
         }
         // tính mẫu số
         foreach ($result as $value) {
             $mauSo = sqrt(($value['JIMMY CHOO'] + $value['Dolce & Gabbana'] + $value['Yves Saint Laurent'] + $value['Dior'] + $value['Versace'] + $value['Giorgio'] + $value['Montblanc'] + $value['Valentino'] + $value['Jo Malone'] + $value['CHANEL'] +  $value['origin_My'] + $value['origin_Y'] + $value['origin_Phap'] + $value['origin_Anh'] + $value['category_man'] + $value['category_women'] + pow($value['rating'] * 1 / 10, 2))) * sqrt(($product['JIMMY CHOO'] + $product['Dolce & Gabbana'] + $product['Yves Saint Laurent'] + $product['Dior'] + $product['Versace'] + $product['Giorgio'] + $product['Montblanc'] + $product['Valentino'] + $product['Jo Malone'] + $product['CHANEL'] +  $product['origin_My'] + $product['origin_Y'] + $product['origin_Phap'] + $product['origin_Anh'] + $product['category_man'] + $product['category_women'] + pow($product['rating'] * 1 / 10, 2)));
-            array_push($arrMauSo, [$mauSo, $value['id']]);
+            array_push($arrMauSo, [$mauSo, $value['id_product']]);
         }
         $i = 0;
-        // var_dump($tu)
         foreach ($arrTuSo as $value) {
             $kq = $value[0] / $arrMauSo[$i][0];
             array_push($arrKetQua, [$kq, $value[1]]);

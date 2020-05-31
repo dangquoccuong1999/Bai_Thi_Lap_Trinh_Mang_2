@@ -108,7 +108,7 @@ class AdminDB
 
     public function sanPhamMoi()
     {       
-        $sql = "SELECT products.id,products.name_product,products.name_producer,products.origin,products.description,products.description,products.category ,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM products, product_detail WHERE products.id= product_detail.id_product AND products.created_at > (UNIX_TIMESTAMP(now()) -24*3600*15) limit 5";
+        $sql = "SELECT products.id,products.name_product,products.name_producer,products.origin,products.description,products.description,products.category ,products.img_product,product_detail.price,product_detail.capacity,product_detail.quantity_number FROM products, product_detail WHERE products.id= product_detail.id_product AND products.created_at > (UNIX_TIMESTAMP(now()) -24*3600*15) ";
         $stmt = $this->conn->query($sql);
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $products;

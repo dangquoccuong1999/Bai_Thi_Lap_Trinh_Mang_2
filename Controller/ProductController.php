@@ -107,6 +107,7 @@ class ProductController
         include_once 'View/singleProduct.php';
     }
 
+    
     public function getSingleProduct()
     {
         $id = $_GET['id'];
